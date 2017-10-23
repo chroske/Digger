@@ -1,6 +1,6 @@
 # Digger
 
-Unity2D
+Unity 2017.2.0f3
 
 dig and shot 2D game
 
