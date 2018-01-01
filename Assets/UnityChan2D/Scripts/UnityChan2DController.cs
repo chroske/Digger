@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(Animator), typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class UnityChan2DController : MonoBehaviour
@@ -12,12 +13,14 @@ public class UnityChan2DController : MonoBehaviour
 	public int playerId;
 	public GameObject digCircle;
 	public GameObject dungeons;
+    public Camera camera;
 
     public float maxSpeed = 10f;
     public float jumpPower = 1000f;
     public Vector2 backwardForce = new Vector2(-4.5f, 5.4f);
 
     public LayerMask whatIsGround;
+    public NetworkPlayerManager networkPlayerManager;
 
     private Animator m_animator;
     //private BoxCollider2D m_boxcollier2D;
@@ -27,6 +30,8 @@ public class UnityChan2DController : MonoBehaviour
     private const float m_centerY = 1.5f;
 
     private State m_state = State.Normal;
+
+    public NetworkTransform networkTransform;
 
     void Reset()
     {
@@ -59,23 +64,34 @@ public class UnityChan2DController : MonoBehaviour
 		m_boxcollier2D = GetComponent<BoxCollider2D>();
         m_rigidbody2D = GetComponent<Rigidbody2D>();
 		maxHp = hp;
+        dungeons = GameObject.Find("Dungeons");
     }
+
+    void Start(){
+        if (networkTransform.isLocalPlayer) {
+            camera = GameObject.Find("MainCamera").GetComponent<Camera>();
+        }
+    }
+
 
     void Update()
     {
+        if(camera != null){
+            camera.transform.position = new Vector3(transform.position.x, transform.position.y, -20f);
+        }
+
         if (m_state != State.Damaged)
         {
-			if (playerId == 1) {
+            if (networkTransform.isLocalPlayer) {
 				float x = Input.GetAxis("Horizontal");
 				bool jump = Input.GetButtonDown("Jump");
 				Dig (Input.GetButtonDown("Fire1"));
 				Move(x, jump);
 			} else {
-				float x = Input.GetAxis("Horizontal2");
-				bool jump = Input.GetButtonDown("Jump2");
-				//bool jump = Input.GetButtonDown("Jump");
-				//Dig (Input.GetButtonDown("Fire1"));
-				Move(x, jump);
+                transform.localScale = networkPlayerManager.syncScale;
+//				float x = Input.GetAxis("Horizontal2");
+//				bool jump = Input.GetButtonDown("Jump2");
+//				Move(x, jump);
 			}
         }
     }
@@ -83,7 +99,7 @@ public class UnityChan2DController : MonoBehaviour
 	void Dig(bool isDig){
 		if(isDig){
 			float digPointX;
-			if (transform.localScale.x == 1) {
+            if (transform.localEulerAngles.y == 0) {
 				digPointX = transform.position.x + 2.0f;
 			} else {
 				digPointX = transform.position.x - 2.0f;
@@ -96,11 +112,14 @@ public class UnityChan2DController : MonoBehaviour
     {
         if (Mathf.Abs(move) > 0)
         {
-            Quaternion rot = transform.rotation;
+           // Quaternion rot = transform.rotation;
            // transform.rotation = Quaternion.Euler(rot.x, Mathf.Sign(move) == 1 ? 0 : 180, rot.z);
 			//transform.rotation = Quaternion.Euler(rot.x, Mathf.Sign(move) == 1 ? 0 : 180, rot.z);
 
 			transform.localScale = new Vector3 (Mathf.Sign(move) == 1 ? 1 : -1, 1, 1);
+
+            networkPlayerManager.CmdProvideScaleToServer(transform.localScale);
+            //networkPlayerManager.scale = transform.localScale;
         }
 
         m_rigidbody2D.velocity = new Vector2(move * maxSpeed, m_rigidbody2D.velocity.y);
@@ -181,4 +200,9 @@ public class UnityChan2DController : MonoBehaviour
 			}
 		}
 	}
+
+
+
+
+
 }
