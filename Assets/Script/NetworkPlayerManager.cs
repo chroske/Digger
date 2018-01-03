@@ -5,18 +5,22 @@ using UnityEngine.Networking;
 
 public class NetworkPlayerManager : NetworkBehaviour {
 
-    [SyncVar]
+    [SyncVar(hook = "SyncScaleValue")]
     public Vector3 syncScale;
 
 
     [Command]
     public void CmdProvideScaleToServer(Vector3 scale){
         syncScale = scale;
-        //        if(syncPlayerNetID == gameSceneManager.turnPlayerId){
-        //            //次のplayerIdを生成
-        //            int nextTurnPlayerId = InclementTurnPlayerId(gameSceneManager.turnPlayerId);
-        //            //全クライアントをターンエンドさせる
-        //            RpcTurnEndClient(unitPos, nextTurnPlayerId);
-        //        }
     }
+
+    [Command]
+    public void CmdProvideWeaponShotToServer(){
+        
+    }
+
+    void SyncScaleValue(Vector3 scale){
+        transform.localScale = scale;
+    }
+   
 }

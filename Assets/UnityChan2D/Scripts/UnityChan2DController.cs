@@ -112,14 +112,8 @@ public class UnityChan2DController : MonoBehaviour
     {
         if (Mathf.Abs(move) > 0)
         {
-           // Quaternion rot = transform.rotation;
-           // transform.rotation = Quaternion.Euler(rot.x, Mathf.Sign(move) == 1 ? 0 : 180, rot.z);
-			//transform.rotation = Quaternion.Euler(rot.x, Mathf.Sign(move) == 1 ? 0 : 180, rot.z);
-
 			transform.localScale = new Vector3 (Mathf.Sign(move) == 1 ? 1 : -1, 1, 1);
-
             networkPlayerManager.CmdProvideScaleToServer(transform.localScale);
-            //networkPlayerManager.scale = transform.localScale;
         }
 
         m_rigidbody2D.velocity = new Vector2(move * maxSpeed, m_rigidbody2D.velocity.y);
