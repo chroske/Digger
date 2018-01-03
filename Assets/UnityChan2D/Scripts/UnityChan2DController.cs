@@ -99,7 +99,7 @@ public class UnityChan2DController : MonoBehaviour
 	void Dig(bool isDig){
 		if(isDig){
 			float digPointX;
-            if (transform.localEulerAngles.y == 0) {
+            if (transform.localScale.x == 1) {
 				digPointX = transform.position.x + 2.0f;
 			} else {
 				digPointX = transform.position.x - 2.0f;
