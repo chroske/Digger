@@ -6,32 +6,31 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(Animator), typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class UnityChan2DController : MonoBehaviour
 {
+    [SerializeField]
+    private WeaponController weaponController;
+
 	public GameObject destroyEffect;
 	float maxHp;
 	public float hp = 10;
 	public Image hpBar;
 	public int playerId;
-	public GameObject digCircle;
-	public GameObject dungeons;
     public Camera camera;
-
     public float maxSpeed = 10f;
     public float jumpPower = 1000f;
     public Vector2 backwardForce = new Vector2(-4.5f, 5.4f);
-
     public LayerMask whatIsGround;
+
     public NetworkPlayerManager networkPlayerManager;
+    public NetworkTransform networkTransform;
 
     private Animator m_animator;
-    //private BoxCollider2D m_boxcollier2D;
 	private BoxCollider2D m_boxcollier2D;
     private Rigidbody2D m_rigidbody2D;
     private bool m_isGround;
     private const float m_centerY = 1.5f;
-
     private State m_state = State.Normal;
 
-    public NetworkTransform networkTransform;
+
 
     void Reset()
     {
@@ -64,7 +63,6 @@ public class UnityChan2DController : MonoBehaviour
 		m_boxcollier2D = GetComponent<BoxCollider2D>();
         m_rigidbody2D = GetComponent<Rigidbody2D>();
 		maxHp = hp;
-        dungeons = GameObject.Find("Dungeons");
     }
 
     void Start(){
@@ -87,8 +85,10 @@ public class UnityChan2DController : MonoBehaviour
 				bool jump = Input.GetButtonDown("Jump");
 				Dig (Input.GetButtonDown("Fire1"));
 				Move(x, jump);
+                weaponController.Shot (Input.GetButtonDown("Fire2"));
+
 			} else {
-                transform.localScale = networkPlayerManager.syncScale;
+                //transform.localScale = networkPlayerManager.syncScale;
 //				float x = Input.GetAxis("Horizontal2");
 //				bool jump = Input.GetButtonDown("Jump2");
 //				Move(x, jump);
@@ -104,7 +104,9 @@ public class UnityChan2DController : MonoBehaviour
 			} else {
 				digPointX = transform.position.x - 2.0f;
 			}
-			Instantiate(digCircle, new Vector3(digPointX, transform.position.y, 0), Quaternion.identity, dungeons.transform);
+            networkPlayerManager.dungeonController.CreateDigCircle(new Vector2(digPointX, transform.position.y));
+            networkPlayerManager.CmdProvideDigToServer(new Vector2(digPointX, transform.position.y), 1);
+			//Instantiate(digCircle, new Vector3(digPointX, transform.position.y, 0), Quaternion.identity, dungeons.transform);
 		}
 	}
 
@@ -187,16 +189,11 @@ public class UnityChan2DController : MonoBehaviour
 
 			Destroy (c.gameObject);
 			hp -= 1f;
-			hpBar.fillAmount = hp / 10;
+			//hpBar.fillAmount = hp / 10;
 			if(hp == 0){
 				var effect = Instantiate(destroyEffect, c.transform.position, Quaternion.identity, this.transform.parent);
 				Destroy (this.gameObject);
 			}
 		}
 	}
-
-
-
-
-
 }

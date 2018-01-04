@@ -7,6 +7,7 @@ TagManager:
   - DamageObject
   - bullet
   - 2pCamera
+  - enemy_bullet
   layers:
   - Default
   - TransparentFX
