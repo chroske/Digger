@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1210158622752208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.735354, y: 0.58618176, z: -15.059718}
+  m_LocalPosition: {x: 0.56, y: 2.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
     i14: 151
     i15: 52
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114749856471133028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84,5 +84,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b4814e918cf4d85903c86f86f6d111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterPrefab: {fileID: 0}
   weaponController: {fileID: 0}
+  unityChan2DController: {fileID: 0}
   syncScale: {x: 1, y: 1, z: 1}
+  dungeonController: {fileID: 0}

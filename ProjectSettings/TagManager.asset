@@ -8,6 +8,8 @@ TagManager:
   - bullet
   - 2pCamera
   - enemy_bullet
+  - my_player_character
+  - other_player_character
   layers:
   - Default
   - TransparentFX

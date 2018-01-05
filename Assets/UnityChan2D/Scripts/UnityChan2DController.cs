@@ -81,6 +81,7 @@ public class UnityChan2DController : MonoBehaviour
         if (m_state != State.Damaged)
         {
             if (networkTransform.isLocalPlayer) {
+            //if(networkPlayerManager.isLocalPlayer){
 				float x = Input.GetAxis("Horizontal");
 				bool jump = Input.GetButtonDown("Jump");
 				Dig (Input.GetButtonDown("Fire1"));
@@ -183,17 +184,17 @@ public class UnityChan2DController : MonoBehaviour
     }
 
 	void OnCollisionEnter2D (Collision2D c){
-		if (c.gameObject.CompareTag ("bullet")) {
-			m_state = State.Damaged;
-			StartCoroutine(INTERNAL_OnDamage());
-
-			Destroy (c.gameObject);
-			hp -= 1f;
-			//hpBar.fillAmount = hp / 10;
-			if(hp == 0){
-				var effect = Instantiate(destroyEffect, c.transform.position, Quaternion.identity, this.transform.parent);
-				Destroy (this.gameObject);
-			}
-		}
+        if(c.gameObject.CompareTag ("bullet") && !networkPlayerManager.isLocalPlayer){
+//            m_state = State.Damaged;
+//            StartCoroutine(INTERNAL_OnDamage());
+            Destroy (c.gameObject);
+        } else if(c.gameObject.CompareTag ("enemy_bullet")){
+            Destroy (c.gameObject);
+        }
 	}
+
+    public void DoDamageAction(int damage){
+        hp -= damage;
+        StartCoroutine(INTERNAL_OnDamage());
+    }
 }

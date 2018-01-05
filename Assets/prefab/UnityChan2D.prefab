@@ -75,10 +75,10 @@ GameObject:
   - component: {fileID: 114530681769292960}
   - component: {fileID: 114459393561657114}
   - component: {fileID: 114829736190107918}
-  - component: {fileID: 114622639093535378}
+  - component: {fileID: 114331088326069802}
   m_Layer: 0
   m_Name: UnityChan2D
-  m_TagString: Untagged
+  m_TagString: other_player_charcter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -211,9 +211,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3ea11349921e04fb990a97c076f07c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkPlayerManager: {fileID: 114622639093535378}
+  networkPlayerManager: {fileID: 114331088326069802}
   bullet: {fileID: 1414807399176454, guid: b628e2e8a8ad73948b0d28a923860376, type: 2}
   muzzle: {fileID: 1484287210392168}
+--- !u!114 &114331088326069802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1991605570992770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b4814e918cf4d85903c86f86f6d111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponController: {fileID: 114176241429031848}
+  unityChan2DController: {fileID: 114358464514131500}
+  syncScale: {x: 0, y: 0, z: 0}
+  dungeonController: {fileID: 0}
 --- !u!114 &114358464514131500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,20 +241,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponController: {fileID: 114176241429031848}
-  destroyEffect: {fileID: 100000, guid: bf3f387d006f0414b80b25ba2b9cdf38, type: 2}
+  destroyEffect: {fileID: 0}
   hp: 10
   hpBar: {fileID: 0}
-  playerId: 1
-  digCircle: {fileID: 1310014553103166, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
-  dungeons: {fileID: 0}
+  playerId: 0
   camera: {fileID: 0}
   maxSpeed: 10
   jumpPower: 1000
   backwardForce: {x: -4.5, y: 5.4}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 257
-  networkPlayerManager: {fileID: 114622639093535378}
+    m_Bits: 4294966729
+  networkPlayerManager: {fileID: 114331088326069802}
   networkTransform: {fileID: 114530681769292960}
 --- !u!114 &114402810818682718
 MonoBehaviour:
@@ -313,19 +326,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &114622639093535378
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1991605570992770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0b4814e918cf4d85903c86f86f6d111, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponController: {fileID: 114176241429031848}
-  syncScale: {x: 1, y: 1, z: 1}
 --- !u!114 &114829736190107918
 MonoBehaviour:
   m_ObjectHideFlags: 1

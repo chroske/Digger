@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour {
-    [SerializeField]
-    private NetworkPlayerManager networkPlayerManager;
+    public NetworkPlayerManager networkPlayerManager;
 
 	public GameObject bullet;
 	public GameObject muzzle;
@@ -20,7 +19,8 @@ public class WeaponController : MonoBehaviour {
 
     public void Shot(bool isShot){
 		if(isShot){
-			Instantiate (bullet, muzzle.transform.position, transform.rotation);
+            var bulletObj = Instantiate (bullet, muzzle.transform.position, transform.rotation).GetComponent<BulletController>();
+            bulletObj.weaponController = this;
             networkPlayerManager.CmdProvideWeaponShotToServer(this.transform.localEulerAngles);
 		}
 	}
