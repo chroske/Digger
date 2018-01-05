@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 114331088326069802}
   m_Layer: 0
   m_Name: UnityChan2D
-  m_TagString: other_player_charcter
+  m_TagString: other_player_character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,6 +228,7 @@ MonoBehaviour:
   weaponController: {fileID: 114176241429031848}
   unityChan2DController: {fileID: 114358464514131500}
   syncScale: {x: 0, y: 0, z: 0}
+  syncHp: 10
   dungeonController: {fileID: 0}
 --- !u!114 &114358464514131500
 MonoBehaviour:

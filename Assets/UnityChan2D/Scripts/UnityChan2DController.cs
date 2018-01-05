@@ -193,8 +193,7 @@ public class UnityChan2DController : MonoBehaviour
         }
 	}
 
-    public void DoDamageAction(int damage){
-        hp -= damage;
+    public void DoDamageAction(){
         StartCoroutine(INTERNAL_OnDamage());
     }
 }
