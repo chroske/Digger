@@ -242,7 +242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponController: {fileID: 114176241429031848}
-  destroyEffect: {fileID: 0}
+  destroyEffect: {fileID: 100000, guid: f75468363e2394440a081e9c175e6c93, type: 2}
   hp: 10
   hpBar: {fileID: 0}
   playerId: 0

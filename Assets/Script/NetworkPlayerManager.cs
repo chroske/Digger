@@ -90,6 +90,7 @@ public class NetworkPlayerManager : NetworkBehaviour {
     }
 
 	void SyncHpValue(int hp){
+		unityChan2DController.hp = (float)hp;
 		unityChan2DController.DoDamageAction ();
 	}
 

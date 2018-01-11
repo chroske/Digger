@@ -68,6 +68,7 @@ public class UnityChan2DController : MonoBehaviour
     void Start(){
         if (networkTransform.isLocalPlayer) {
             camera = GameObject.Find("MainCamera").GetComponent<Camera>();
+			hpBar = GameObject.Find("Canvas/HpBar").GetComponent<Image>();
         }
     }
 
@@ -194,6 +195,15 @@ public class UnityChan2DController : MonoBehaviour
 	}
 
     public void DoDamageAction(){
-        StartCoroutine(INTERNAL_OnDamage());
+		if(networkTransform.isLocalPlayer){
+			hpBar.fillAmount = hp / 10;
+		}
+
+		if (hp == 0) {
+			var effect = Instantiate (destroyEffect, transform.position, Quaternion.identity);
+			Destroy (this.gameObject);
+		} else {
+			StartCoroutine(INTERNAL_OnDamage());
+		}
     }
 }
