@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4660260405550328}
-  - component: {fileID: 111568392254649840}
+  - component: {fileID: 95326417766856412}
   m_Layer: 0
-  m_Name: Digger_TestModel
+  m_Name: TestModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -505,27 +505,23 @@ Transform:
   m_Father: {fileID: 4188155641371358}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &111568392254649840
-Animation:
+--- !u!95 &95326417766856412
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1041380195923224}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: ace007cddb3ce4c42882fec838cf27d0, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 4fef61af81daedd408c5fd1e86ae9714, type: 2}
-  - {fileID: 7400000, guid: ace007cddb3ce4c42882fec838cf27d0, type: 2}
-  - {fileID: 7400000, guid: cfdfec00e62bc2b4fadf20627c9a96ad, type: 2}
-  - {fileID: 7400000, guid: d872b0a86240fec4884a54d8a6514e58, type: 2}
-  - {fileID: 7400000, guid: 1676227b8d5d34341b647a8182c1e989, type: 2}
-  - {fileID: 7400000, guid: 4a2a97d772326a74c8c25274b4546685, type: 2}
-  - {fileID: 7400000, guid: 1676227b8d5d34341b647a8182c1e989, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3313e9111151a4f4894b3f4a3fc46a29, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!137 &137362627014199410
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
