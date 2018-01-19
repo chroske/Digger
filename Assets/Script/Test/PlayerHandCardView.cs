@@ -6,13 +6,14 @@ using System.Collections.Generic;
 public class PlayerHandCardView : MonoBehaviour {
 
 	public List<GameObject> handCardObjects;
-	public float handCardInterval = 100f; //数が大きいほど幅ができるよ
+	//public float handCardInterval = 100f; //数が大きいほど幅ができるよ //廃止
 	public float cardAngleInterval = 5f; //数が大きいほど斜めになるよ
 	public float handCardLowerRatio = 10; //数が小さいほど外側が下がるよ
 	public float ResetPositionAnimationTime = 1.0f; //数が大きいほどゆっくりアニメーションするよ
 
-	float cardBasewidth = 310;
-	float screenWidth = 1080;
+	float cardBasewidth = 310; //カードの
+	float screenWidth = 1080; //数が大きいほど幅ができるよ
+	float handCardInterval = 0;
 
 	void Start(){
 		ResetPositionHandCard ();
