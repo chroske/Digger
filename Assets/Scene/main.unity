@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074, b: 0.35872692, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -671,7 +671,7 @@ RectTransform:
   m_GameObject: {fileID: 981728189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.19, y: 3.53, z: 75}
-  m_LocalScale: {x: 0.046121214, y: 0.046121214, z: 0.046121214}
+  m_LocalScale: {x: 0.04612121, y: 0.04612121, z: 0.04612121}
   m_Children:
   - {fileID: 1277591267}
   m_Father: {fileID: 0}
@@ -801,7 +801,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1277591264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 235.24998, z: -2000}
+  m_LocalPosition: {x: 0, y: 235.25, z: -2000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 981728193}
@@ -1407,7 +1407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkPlayerManager: {fileID: 0}
-  digCircle: {fileID: 1310014553103166, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+  digCircle: {fileID: 1975781768585152, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
   exprosionEffect: {fileID: 1098162255040386, guid: ee55bd9e30f77464281e1a764f478c86,
     type: 2}
   compositeCollider2D: {fileID: 0}
