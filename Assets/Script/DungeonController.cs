@@ -7,6 +7,7 @@ public class DungeonController : MonoBehaviour {
     public NetworkPlayerManager networkPlayerManager;
 	public GameObject digCircle;
 	public GameObject exprosionEffect;
+	public CompositeCollider2D compositeCollider2D;
 
 	void OnCollisionEnter2D (Collision2D c){
 		if (c.gameObject.CompareTag ("bullet")) {
@@ -21,6 +22,9 @@ public class DungeonController : MonoBehaviour {
             Destroy (c.gameObject);
             Destroy (effect, 0.3f);
         }
+
+
+		//compositeCollider2D.edgeRadius;
 	}
 
     public GameObject CreateDigCircle(Vector2 position, float sizeRatio = 1f){

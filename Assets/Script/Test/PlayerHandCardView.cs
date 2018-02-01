@@ -2,17 +2,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class PlayerHandCardView : MonoBehaviour {
 
 	public List<GameObject> handCardObjects;
-	//public float handCardInterval = 100f; //数が大きいほど幅ができるよ //廃止
 	public float cardAngleInterval = 5f; //数が大きいほど斜めになるよ
 	public float handCardLowerRatio = 10; //数が小さいほど外側が下がるよ
 	public float ResetPositionAnimationTime = 1.0f; //数が大きいほどゆっくりアニメーションするよ
 
-	float cardBasewidth = 310; //カードの
-	float screenWidth = 1080; //数が大きいほど幅ができるよ
+	public float cardBasewidth = 310; //カードの
+	public float screenWidth = 1080; //数が大きいほど幅ができるよ
 	float handCardInterval = 0;
 
 	void Start(){
@@ -44,14 +44,23 @@ public class PlayerHandCardView : MonoBehaviour {
 		Vector3 baseLeftCardPosition = new Vector3(handCardInterval*(handCardObjects.Count - 1)/-2, 0, 0);
 		Vector3 baseLeftCardRotate = new Vector3(0, 0, cardAngleInterval*(handCardObjects.Count-1)/2);
 
-		if (baseLeftCardPosition.x < -0.5f * screenWidth + cardBasewidth * 0.5f)
+		if (baseLeftCardPosition.x < screenWidth /-2)
 		{
-			baseLeftCardPosition = new Vector3(-0.5f * screenWidth + cardBasewidth * 0.5f, 0, 0);
+			baseLeftCardPosition = new Vector3(screenWidth /-2, 0, 0);
 		}
+
+		//総和
+		int totalSum = 0;
+		for (int j=1; j<=handCardObjects.Count; j++) {
+			totalSum += j;
+		}
+		//中央値
+		float CenterNum = totalSum/handCardObjects.Count;
 
 		int i = 0;
 		foreach (GameObject obj in handCardObjects) {
-			Vector3 targetPosition = new Vector3 (baseLeftCardPosition.x+handCardInterval*i, Mathf.Abs(baseLeftCardPosition.x+handCardInterval*i)/-handCardLowerRatio, 0);
+			Vector3 targetPosition = new Vector3 (baseLeftCardPosition.x+handCardInterval*i, (handCardLowerRatio/handCardObjects.Count)*Mathf.Abs(CenterNum-(i+1)), 0);
+
 			obj.GetComponent<GameCardView>().SetCardPosition(targetPosition);
 			Vector3 targetRotate = new Vector3 (0, 0, baseLeftCardRotate.z-handCardAngle*i);
 			StartCoroutine (UpdatePosition (targetPosition, targetRotate, ResetPositionAnimationTime, obj));
