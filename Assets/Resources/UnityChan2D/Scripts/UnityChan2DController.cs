@@ -43,7 +43,7 @@ public class UnityChan2DController : MonoBehaviour
         whatIsGround = 1 << LayerMask.NameToLayer("Ground");
 
         // Transform
-        transform.localScale = new Vector3(1, 1, 1);
+        transform.localScale = new Vector3(10, 10, 1);
 
         // Rigidbody2D
         m_rigidbody2D.gravityScale = 3.5f;
@@ -116,7 +116,7 @@ public class UnityChan2DController : MonoBehaviour
     {
         if (Mathf.Abs(move) > 0)
         {
-			transform.localScale = new Vector3 (Mathf.Sign(move) == 1 ? 1 : -1, 1, 1);
+			transform.localScale = new Vector3 ((Mathf.Sign(move) == 1 ? 1 : -1)*transform.localScale.x, transform.localScale.y, 1);
             networkPlayerManager.CmdProvideScaleToServer(transform.localScale);
         }
 
