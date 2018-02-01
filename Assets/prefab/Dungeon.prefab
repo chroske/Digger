@@ -9,18 +9,17 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1310014553103166}
+  m_RootGameObject: {fileID: 1975781768585152}
   m_IsPrefabParent: 1
 --- !u!1 &1004945354470504
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4989052870603472}
   - component: {fileID: 212644559250192636}
-  - component: {fileID: 60978770748015118}
   - component: {fileID: 331590015834094678}
   m_Layer: 0
   m_Name: mask
@@ -38,6 +37,21 @@ GameObject:
   m_Component:
   - component: {fileID: 4167802449416806}
   - component: {fileID: 212141214081068878}
+  m_Layer: 0
+  m_Name: outLine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1975781768585152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4839146213292692}
   - component: {fileID: 60435164598913704}
   m_Layer: 0
   m_Name: Dungeon
@@ -53,10 +67,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1310014553103166}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.96, y: -4.07, z: 0}
-  m_LocalScale: {x: 31, y: 31, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0407443, y: 1.0407443, z: 0}
   m_Children:
   - {fileID: 4989052870603472}
+  m_Father: {fileID: 4839146213292692}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4839146213292692
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1975781768585152}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -9.09, y: -1.9, z: 0}
+  m_LocalScale: {x: 31, y: 31, z: 0}
+  m_Children:
+  - {fileID: 4167802449416806}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -67,8 +95,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1004945354470504}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0}
+  m_LocalPosition: {x: -0.0001, y: -0.0004, z: 0}
+  m_LocalScale: {x: 0.9230461, y: 0.9230461, z: 0}
   m_Children: []
   m_Father: {fileID: 4167802449416806}
   m_RootOrder: 0
@@ -78,52 +106,7 @@ PolygonCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1310014553103166}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 1
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.2}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.010238292, y: 0.08776114}
-      - {x: -0.042163957, y: 0.07821567}
-      - {x: -0.066251785, y: 0.06366518}
-      - {x: -0.08604094, y: 0.02835942}
-      - {x: -0.090830214, y: -0.00338578}
-      - {x: -0.087782346, y: -0.027373407}
-      - {x: -0.07220996, y: -0.053164233}
-      - {x: -0.05041046, y: -0.07663873}
-      - {x: -0.022644812, y: -0.08781777}
-      - {x: -0.006264805, y: -0.091467924}
-      - {x: 0.012613918, y: -0.09050095}
-      - {x: 0.030557899, y: -0.08524215}
-      - {x: 0.04495285, y: -0.08000002}
-      - {x: 0.055030964, y: -0.07125222}
-      - {x: 0.06664569, y: -0.058833227}
-      - {x: 0.080143936, y: -0.03604778}
-      - {x: 0.086040154, y: -0.021522583}
-      - {x: 0.08779006, y: 0.0058993096}
-      - {x: 0.084711865, y: 0.031972624}
-      - {x: 0.057742834, y: 0.068833224}
-      - {x: 0.02606569, y: 0.08466707}
---- !u!60 &60978770748015118
-PolygonCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1004945354470504}
+  m_GameObject: {fileID: 1975781768585152}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
