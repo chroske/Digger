@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074, b: 0.35872692, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -112,52 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &207456832
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 2.16
-      objectReference: {fileID: 0}
-    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1243881645417700, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &237922330
 Prefab:
   m_ObjectHideFlags: 0
@@ -200,6 +154,18 @@ Prefab:
     - target: {fileID: 1975781768585152, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
       propertyPath: m_Name
       value: Dungeon (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1975781768585152, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310014553103166, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004945354470504, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
@@ -508,6 +474,18 @@ Prefab:
       propertyPath: m_AutoTiling
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1975781768585152, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310014553103166, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004945354470504, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
   m_IsPrefabParent: 0
@@ -684,7 +662,7 @@ RectTransform:
   m_GameObject: {fileID: 981728189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.19, y: 3.53, z: 75}
-  m_LocalScale: {x: 0.04612121, y: 0.04612121, z: 0.04612121}
+  m_LocalScale: {x: 0.046121214, y: 0.046121214, z: 0.046121214}
   m_Children:
   - {fileID: 1277591267}
   m_Father: {fileID: 0}
@@ -867,6 +845,18 @@ Prefab:
     - target: {fileID: 1975781768585152, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
       propertyPath: m_Name
       value: Dungeon (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1975781768585152, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310014553103166, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004945354470504, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
@@ -1078,6 +1068,18 @@ Prefab:
       propertyPath: m_Name
       value: Dungeon (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1310014553103166, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004945354470504, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1975781768585152, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91aca70f0803b8640a506afc9bb20721, type: 2}
   m_IsPrefabParent: 0
@@ -1102,7 +1104,7 @@ GameObject:
   - component: {fileID: 1647215408}
   - component: {fileID: 1647215407}
   - component: {fileID: 1647215410}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Dungeons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1424,3 +1426,49 @@ MonoBehaviour:
   exprosionEffect: {fileID: 1098162255040386, guid: ee55bd9e30f77464281e1a764f478c86,
     type: 2}
   compositeCollider2D: {fileID: 0}
+--- !u!1001 &2000057874
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4553113009571954, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1243881645417700, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
+  m_IsPrefabParent: 0

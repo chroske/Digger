@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
-[RequireComponent(typeof(Animator), typeof(Rigidbody2D), typeof(BoxCollider2D))]
+[RequireComponent(/*typeof(Animator), */typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class UnityChan2DController : MonoBehaviour
 {
     [SerializeField]
