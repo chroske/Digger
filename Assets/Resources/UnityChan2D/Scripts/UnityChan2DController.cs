@@ -28,7 +28,7 @@ public class UnityChan2DController : MonoBehaviour
     private Rigidbody2D m_rigidbody2D;
     private bool m_isGround;
     //private const float m_centerY = 1.5f;
-	private const float m_centerY = 0f;
+	private const float m_centerY = 0.5f;
     private State m_state = State.Normal;
 
 	private bool isDirectionRight;
