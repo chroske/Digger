@@ -252,7 +252,7 @@ MonoBehaviour:
   backwardForce: {x: -4.5, y: 5.4}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294966729
+    m_Bits: 4294966472
   networkPlayerManager: {fileID: 114331088326069802}
   networkTransform: {fileID: 114530681769292960}
 --- !u!114 &114402810818682718

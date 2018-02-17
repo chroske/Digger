@@ -27,8 +27,11 @@ public class UnityChan2DController : MonoBehaviour
 	private BoxCollider2D m_boxcollier2D;
     private Rigidbody2D m_rigidbody2D;
     private bool m_isGround;
-    private const float m_centerY = 1.5f;
+    //private const float m_centerY = 1.5f;
+	private const float m_centerY = 0f;
     private State m_state = State.Normal;
+
+	private bool isDirectionRight;
 
 
 
@@ -68,7 +71,7 @@ public class UnityChan2DController : MonoBehaviour
     void Start(){
         if (networkTransform.isLocalPlayer) {
             camera = GameObject.Find("MainCamera").GetComponent<Camera>();
-			hpBar = GameObject.Find("Canvas/HpBar").GetComponent<Image>();
+			//hpBar = GameObject.Find("Canvas/HpBar").GetComponent<Image>();
         }
     }
 
@@ -102,9 +105,9 @@ public class UnityChan2DController : MonoBehaviour
 		if(isDig){
 			float digPointX;
             if (transform.localScale.x == 1) {
-				digPointX = transform.position.x + 2.0f;
-			} else {
 				digPointX = transform.position.x - 2.0f;
+			} else {
+				digPointX = transform.position.x + 2.0f;
 			}
             networkPlayerManager.dungeonController.CreateDigCircle(new Vector2(digPointX, transform.position.y));
             networkPlayerManager.CmdProvideDigToServer(new Vector2(digPointX, transform.position.y), 1);
@@ -114,10 +117,21 @@ public class UnityChan2DController : MonoBehaviour
 
     void Move(float move, bool jump)
     {
+		if (weaponController.gameObject.transform.rotation.z >= 0 && !isDirectionRight) {
+			isDirectionRight = true;
+			transform.localScale = new Vector3 (1, transform.localScale.y, transform.localScale.z);
+			networkPlayerManager.CmdProvideScaleToServer(transform.localScale);
+		} else if(weaponController.gameObject.transform.rotation.z < 0 && isDirectionRight) {
+			isDirectionRight = false;
+			transform.localScale = new Vector3 (-1, transform.localScale.y, transform.localScale.z);
+			networkPlayerManager.CmdProvideScaleToServer(transform.localScale);
+		}
+
+
         if (Mathf.Abs(move) > 0)
         {
-			transform.localScale = new Vector3 ((Mathf.Sign(move) == 1 ? 1 : -1)*transform.localScale.x, transform.localScale.y, 1);
-            networkPlayerManager.CmdProvideScaleToServer(transform.localScale);
+			//transform.localScale = new Vector3 ((Mathf.Sign(move) == 1 ? 1 : -1)*transform.localScale.x, transform.localScale.y, 1);
+            //networkPlayerManager.CmdProvideScaleToServer(transform.localScale);
         }
 
         m_rigidbody2D.velocity = new Vector2(move * maxSpeed, m_rigidbody2D.velocity.y);
@@ -138,7 +152,7 @@ public class UnityChan2DController : MonoBehaviour
     {
         Vector2 pos = transform.position;
         Vector2 groundCheck = new Vector2(pos.x, pos.y - (m_centerY * transform.localScale.y));
-        Vector2 groundArea = new Vector2(m_boxcollier2D.size.x * 0.49f, 0.05f);
+		Vector2 groundArea = new Vector2(m_boxcollier2D.size.x * 0.49f, 0.1f);
 
         m_isGround = Physics2D.OverlapArea(groundCheck + groundArea, groundCheck - groundArea, whatIsGround);
         m_animator.SetBool("isGround", m_isGround);
