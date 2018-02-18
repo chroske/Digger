@@ -12,8 +12,9 @@ public class WeaponController : MonoBehaviour {
 	void Update () {
 		//武器をマウス方向に追従させる
         if(networkPlayerManager.isLocalPlayer){
-            Vector3 diff = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.transform.position).normalized;
-            this.transform.rotation = Quaternion.FromToRotation (Vector3.up, new Vector3(diff.x, diff.y, 0));
+			var pos = Camera.main.WorldToScreenPoint (transform.position);
+			var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - pos );
+			this.transform.rotation = rotation;
         }
 	}
 

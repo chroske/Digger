@@ -117,16 +117,15 @@ public class UnityChan2DController : MonoBehaviour
 
     void Move(float move, bool jump)
     {
-		if (weaponController.gameObject.transform.rotation.z >= 0 && !isDirectionRight) {
+		if (weaponController.gameObject.transform.rotation.eulerAngles.z > 180f && !isDirectionRight) {
 			isDirectionRight = true;
-			transform.localScale = new Vector3 (1, transform.localScale.y, transform.localScale.z);
-			networkPlayerManager.CmdProvideScaleToServer(transform.localScale);
-		} else if(weaponController.gameObject.transform.rotation.z < 0 && isDirectionRight) {
-			isDirectionRight = false;
 			transform.localScale = new Vector3 (-1, transform.localScale.y, transform.localScale.z);
 			networkPlayerManager.CmdProvideScaleToServer(transform.localScale);
+		} else if(weaponController.gameObject.transform.rotation.eulerAngles.z < 180f && isDirectionRight){
+			isDirectionRight = false;
+			transform.localScale = new Vector3 (1, transform.localScale.y, transform.localScale.z);
+			networkPlayerManager.CmdProvideScaleToServer(transform.localScale);
 		}
-
 
         if (Mathf.Abs(move) > 0)
         {
