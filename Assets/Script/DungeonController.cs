@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DungeonController : MonoBehaviour {
+public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
 
     public NetworkPlayerManager networkPlayerManager;
 	public GameObject digCircle;
@@ -10,22 +10,44 @@ public class DungeonController : MonoBehaviour {
 	public CompositeCollider2D compositeCollider2D;
 
 	void OnCollisionEnter2D (Collision2D c){
-		if (c.gameObject.CompareTag ("bullet")) {
-			var effect = Instantiate(exprosionEffect, c.transform.position, Quaternion.identity, this.transform.parent);
-            CreateDigCircle(c.transform.position, 0.5f);
-            networkPlayerManager.CmdProvideDigToServer(c.transform.position, 0.5f);
+		var tagIndex = c.gameObject.tag.IndexOf ("enemy_");
+		if (tagIndex >= 0) {
+			var tagText = c.gameObject.tag.Remove (tagIndex, 6);
+			switch(tagText){
+			case "bullet":
+				var effect = Instantiate (exprosionEffect, c.transform.position, Quaternion.identity, this.transform.parent);
+				Destroy (c.gameObject);
+				Destroy (effect, 0.3f);
+				break;
+			case "drillBullet":
+				break;
+			}
+		} else {
+			switch (c.gameObject.tag) {
+			case "bullet":
+				var effect = Instantiate (exprosionEffect, c.transform.position, Quaternion.identity, this.transform.parent);
+				CreateDigCircle (c.transform.position, 0.5f);
+				networkPlayerManager.CmdProvideDigToServer (c.transform.position, 0.5f);
+				Destroy (c.gameObject);
+				Destroy (effect, 0.3f);
+				break;
+			case "drillBullet":
+				break;
+			}
+		}
 
-			Destroy (c.gameObject);
-			Destroy (effect, 0.3f);
-        } else if(c.gameObject.CompareTag ("enemy_bullet")){
-            var effect = Instantiate(exprosionEffect, c.transform.position, Quaternion.identity, this.transform.parent);
-            Destroy (c.gameObject);
-            Destroy (effect, 0.3f);
-        }
 
+
+
+//		if (c.gameObject.CompareTag ("bullet")) {
+//
+//        } else if(c.gameObject.CompareTag ("enemy_bullet")){
+//           
+//        }
 
 		//compositeCollider2D.edgeRadius;
 	}
+		
 
     public GameObject CreateDigCircle(Vector2 position, float sizeRatio = 1f){
         var digHole = Instantiate(digCircle, position, Quaternion.identity, this.transform);

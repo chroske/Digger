@@ -10,6 +10,9 @@ TagManager:
   - enemy_bullet
   - my_player_character
   - other_player_character
+  - dungeon
+  - drillBullet
+  - enemy_drillBullet
   layers:
   - Default
   - TransparentFX
