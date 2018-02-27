@@ -28,7 +28,7 @@ public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
 				var effect = Instantiate (exprosionEffect, c.transform.position, Quaternion.identity, this.transform.parent);
 				CreateDigCircle (c.transform.position, 0.5f);
 				networkPlayerManager.CmdProvideDigToServer (c.transform.position, 0.5f);
-				Destroy (c.gameObject);
+				//Destroy (c.gameObject);
 				Destroy (effect, 0.3f);
 				break;
 			case "drillBullet":
@@ -55,4 +55,18 @@ public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
 
         return digHole;
     }
+
+
+
+//	public float lifespan; private float timer;
+//	//Create this later: 
+//	public AnotherScript master; 
+//	void Update () { 
+//		//Set the lifespan of this cube to the masterscript length value 
+//		lifespan = master.length; 
+//		//Keep the timer ticking! 
+//		timer += Time.deltaTime; 
+//		//If the timer (which keeps track of how many seconds we've been alive) is bigger than our allotted lifespan, destroy ourselves 
+//		if(timer>lifespan){ GameObject.Destroy (gameObject); } 
+//	}
 }

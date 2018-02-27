@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 212672366786984402}
   - component: {fileID: 50715180322586454}
   - component: {fileID: 61114192511492568}
+  - component: {fileID: 114666471469372586}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: bullet
@@ -69,7 +70,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1414807399176454}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -88,6 +89,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.33065775, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114666471469372586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1414807399176454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9db6d618c0b414b9d952b5b72808b3bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletController: {fileID: 114908215294986442}
+  trailMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  lifeTime: 0
+  changeTime: 0
+  widthStart: 2
+  widthEnd: 2
+  vertexDistanceMin: 0.1
+  renderDirection: {x: 0, y: 0, z: -1}
+  colliderIsTrigger: 0
+  colliderEnabled: 1
+  pausing: 0
 --- !u!114 &114908215294986442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 883f6b3a35900f54b97acbab6de93886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponController: {fileID: 0}
   speed: 20
 --- !u!212 &212672366786984402
 SpriteRenderer:

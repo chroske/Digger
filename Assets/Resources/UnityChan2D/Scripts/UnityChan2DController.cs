@@ -66,6 +66,7 @@ public class UnityChan2DController : MonoBehaviour
 		m_boxcollier2D = GetComponent<BoxCollider2D>();
         m_rigidbody2D = GetComponent<Rigidbody2D>();
 		maxHp = hp;
+		//m_centerY = (m_boxcollier2D.size.y / 2) + 0.25f;
     }
 
     void Start(){
