@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletController: {fileID: 114908215294986442}
-  trailMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  trailMaterial: {fileID: 2100000, guid: b8525eb9f43174691b709af8289adb3a, type: 2}
   lifeTime: 0
   changeTime: 0
   widthStart: 2
