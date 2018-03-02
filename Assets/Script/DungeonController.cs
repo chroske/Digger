@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HC.Debug;
 
 public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
 
@@ -8,6 +9,12 @@ public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
 	public GameObject digCircle;
 	public GameObject exprosionEffect;
 	public CompositeCollider2D compositeCollider2D;
+
+	public ColliderVisualizer colliderVisualizer;
+	void Awake(){
+		var color = ColliderVisualizer.VisualizerColorType.Red;
+		colliderVisualizer.Initialize( color, "あいうえお", 36 );
+	}
 
 	void OnCollisionEnter2D (Collision2D c){
 		var tagIndex = c.gameObject.tag.IndexOf ("enemy_");
