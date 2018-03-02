@@ -667,7 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkPlayerManager: {fileID: 114545725206144160}
-  bullet: {fileID: 1414807399176454, guid: b628e2e8a8ad73948b0d28a923860376, type: 2}
+  bullet: {fileID: 1523946111672368, guid: 9f173e20291914723993fb3cefb18047, type: 2}
   muzzle: {fileID: 1233286212783852}
 --- !u!114 &114445560934105322
 MonoBehaviour:

@@ -16,7 +16,8 @@ SubShader
  
         Stencil {
                         Ref [_Stencil]
-                        Comp Equal
+                        //Comp Equal
+                        Comp notequal
                 }
      
         Pass
