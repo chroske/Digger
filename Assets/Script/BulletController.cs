@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour {
+public class BulletController : BaseBulletController {
 
-    public WeaponController weaponController;
+    //public WeaponController weaponController;
 
-	public int speed = 10;
+	//public int speed = 10;
 
-	void Start(){
-		GetComponent<Rigidbody2D>().velocity = transform.up.normalized * speed;
-	}
+	//void Start(){
+	//	GetComponent<Rigidbody2D>().velocity = transform.up.normalized * speed;
+	//}
 
     void OnCollisionEnter2D (Collision2D c){
         if(transform.gameObject.CompareTag ("bullet") && c.gameObject.CompareTag ("other_player_character")){

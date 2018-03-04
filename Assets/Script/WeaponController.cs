@@ -20,8 +20,8 @@ public class WeaponController : MonoBehaviour {
 
     public void Shot(bool isShot){
 		if(isShot){
-            var bulletObj = Instantiate (bullet, muzzle.transform.position, transform.rotation).GetComponent<BulletController>();
-            bulletObj.weaponController = this;
+			var baseBulletController = Instantiate (bullet, muzzle.transform.position, transform.rotation).GetComponent<BaseBulletController>();
+			baseBulletController.weaponController = this;
             networkPlayerManager.CmdProvideWeaponShotToServer(this.transform.localEulerAngles);
 		}
 	}

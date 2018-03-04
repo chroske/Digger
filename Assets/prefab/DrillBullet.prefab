@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4946557989104928}
-  - component: {fileID: 114920406467767104}
+  - component: {fileID: 114033801024879222}
   - component: {fileID: 212062945444201548}
   - component: {fileID: 50273214962401546}
   - component: {fileID: 61604813829977412}
@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1523946111672368}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8165002, y: 0.59630275, z: 1}
+  m_LocalPosition: {x: 0, y: 0.599, z: 0}
+  m_LocalScale: {x: 0.8165002, y: 1.0639566, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -80,7 +80,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2.56, y: 2.56}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -89,6 +89,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.33065775, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114033801024879222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1523946111672368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f765e9d524a843e46b554102a034bbb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponController: {fileID: 0}
+  speed: 10
+  trailRendererWith2DCollider: {fileID: 114779400923295592}
+  destroyTime: 2
 --- !u!114 &114779400923295592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db6d618c0b414b9d952b5b72808b3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletController: {fileID: 114920406467767104}
+  baseBulletController: {fileID: 114033801024879222}
   trailMaterial: {fileID: 2100000, guid: b8525eb9f43174691b709af8289adb3a, type: 2}
   lifeTime: 0
   changeTime: 0
@@ -110,20 +125,7 @@ MonoBehaviour:
   renderDirection: {x: 0, y: 0, z: -1}
   colliderIsTrigger: 0
   colliderEnabled: 1
-  pausing: 0
---- !u!114 &114920406467767104
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1523946111672368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883f6b3a35900f54b97acbab6de93886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponController: {fileID: 0}
-  speed: 20
+  pausing: 1
 --- !u!212 &212062945444201548
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -158,7 +160,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300002, guid: 82f6479c556d14828b9d953594ab4fd0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f249761d01a3246ebb0a26dd10f74026, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

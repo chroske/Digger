@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class TrailRendererWith2DCollider : MonoBehaviour {
 
 	[SerializeField]
-	BulletController bulletController;
+	BaseBulletController baseBulletController;
 
 	//************
 	//
@@ -95,7 +95,7 @@ public class TrailRendererWith2DCollider : MonoBehaviour {
 
 	void Start(){
 		collider.usedByComposite = true;
-		collider.gameObject.transform.SetParent (bulletController.weaponController.networkPlayerManager.dungeonController.gameObject.transform, true);
+		collider.gameObject.transform.SetParent (baseBulletController.weaponController.networkPlayerManager.dungeonController.gameObject.transform, true);
 	}
 
 	private void Update() {
