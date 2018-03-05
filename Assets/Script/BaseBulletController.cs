@@ -5,6 +5,7 @@ using UnityEngine;
 public class BaseBulletController : MonoBehaviour {
 	public WeaponController weaponController;
 	public float speed = 10f;
+	public float damage = 1.0f;
 
 	void Start(){
 		GetComponent<Rigidbody2D>().velocity = transform.up.normalized * speed;

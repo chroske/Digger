@@ -1484,6 +1484,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 224041854858382548, guid: 24151235e978c4aa7a5b0102c79a7801,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1243881645417700, guid: 24151235e978c4aa7a5b0102c79a7801, type: 2}
       propertyPath: m_IsActive
       value: 0

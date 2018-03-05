@@ -15,7 +15,7 @@ public class BulletController : BaseBulletController {
     void OnCollisionEnter2D (Collision2D c){
         if(transform.gameObject.CompareTag ("bullet") && c.gameObject.CompareTag ("other_player_character")){
             var enemyNetId = c.gameObject.GetComponent<NetworkPlayerManager>().netId;
-            weaponController.networkPlayerManager.CmdProvideHitDamageObjectOtherPlayerToServer(enemyNetId);
+            weaponController.networkPlayerManager.CmdProvideHitDamageObjectOtherPlayerToServer(enemyNetId, damage);
         } else if(c.gameObject.CompareTag ("enemy_bullet")){
         }
     }

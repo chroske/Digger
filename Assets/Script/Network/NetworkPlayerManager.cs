@@ -15,7 +15,7 @@ public class NetworkPlayerManager : NetworkBehaviour {
     [SyncVar(hook = "SyncScaleValue")]
     public Vector3 syncScale;
 	[SyncVar(hook = "SyncHpValue")]
-	public int syncHp;
+	public float syncHp;
 
     public DungeonController dungeonController;
 
@@ -65,8 +65,8 @@ public class NetworkPlayerManager : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdProvideHitDamageObjectOtherPlayerToServer(NetworkInstanceId hitPlayerNetId){
-		GameStatusManager.Instance.playersManagerDic [hitPlayerNetId.Value].syncHp -= 1;
+	public void CmdProvideHitDamageObjectOtherPlayerToServer(NetworkInstanceId hitPlayerNetId, float damage){
+		GameStatusManager.Instance.playersManagerDic [hitPlayerNetId.Value].syncHp -= damage;
     }
 
     [ClientRpc]
@@ -89,8 +89,8 @@ public class NetworkPlayerManager : NetworkBehaviour {
         }
     }
 
-	void SyncHpValue(int hp){
-		unityChan2DController.hp = (float)hp;
+	void SyncHpValue(float hp){
+		unityChan2DController.hp = hp;
 		unityChan2DController.DoDamageAction ();
 	}
 

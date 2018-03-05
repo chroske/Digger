@@ -7,13 +7,14 @@ using UnityEngine.Networking;
 [RequireComponent(/*typeof(Animator), */typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class UnityChan2DController : MonoBehaviour
 {
+	[SerializeField]
+	private Slider hpSlider;
     [SerializeField]
     private WeaponController weaponController;
 
 	public GameObject destroyEffect;
 	float maxHp;
 	public float hp = 10;
-	public Image hpBar;
 	public int playerId;
     public Camera camera;
     public float maxSpeed = 10f;
@@ -87,7 +88,6 @@ public class UnityChan2DController : MonoBehaviour
         if (m_state != State.Damaged)
         {
             if (networkTransform.isLocalPlayer) {
-            //if(networkPlayerManager.isLocalPlayer){
 				float x = Input.GetAxis("Horizontal");
 				bool jump = Input.GetButtonDown("Jump");
 				Dig (Input.GetButtonDown("Fire1"));
@@ -95,10 +95,7 @@ public class UnityChan2DController : MonoBehaviour
                 weaponController.Shot (Input.GetButtonDown("Fire2"));
 				weaponController.ChangeBullet (Input.GetAxis ("Mouse ScrollWheel"));
 			} else {
-                //transform.localScale = networkPlayerManager.syncScale;
-//				float x = Input.GetAxis("Horizontal2");
-//				bool jump = Input.GetButtonDown("Jump2");
-//				Move(x, jump);
+
 			}
         }
     }
@@ -113,7 +110,6 @@ public class UnityChan2DController : MonoBehaviour
 			}
             networkPlayerManager.dungeonController.CreateDigCircle(new Vector2(digPointX, transform.position.y));
             networkPlayerManager.CmdProvideDigToServer(new Vector2(digPointX, transform.position.y), 1);
-			//Instantiate(digCircle, new Vector3(digPointX, transform.position.y, 0), Quaternion.identity, dungeons.transform);
 		}
 	}
 
@@ -211,7 +207,7 @@ public class UnityChan2DController : MonoBehaviour
 
     public void DoDamageAction(){
 		if(networkTransform.isLocalPlayer){
-			hpBar.fillAmount = hp / 10;
+			hpSlider.value =  hp / maxHp;
 		}
 
 		if (hp == 0) {
