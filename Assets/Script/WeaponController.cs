@@ -46,12 +46,14 @@ public class WeaponController : MonoBehaviour {
 				currentBulletsIndex = 0;
 			}
 			bullet = bullets [currentBulletsIndex];
+			networkPlayerManager.unityChan2DController.weaponIcon.sprite = bullet.GetComponent<BaseBulletController> ().weaponIconImage;
 		} else if (axis < 0.0f) {
 			currentBulletsIndex--;
 			if(currentBulletsIndex < 0){
 				currentBulletsIndex = bullets.Count-1;
 			}
 			bullet = bullets [currentBulletsIndex];
+			networkPlayerManager.unityChan2DController.weaponIcon.sprite = bullet.GetComponent<BaseBulletController> ().weaponIconImage;
 		} else {
 			// do nothing
 		}

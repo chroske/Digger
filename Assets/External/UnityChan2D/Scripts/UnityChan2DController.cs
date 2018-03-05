@@ -7,6 +7,9 @@ using UnityEngine.Networking;
 [RequireComponent(/*typeof(Animator), */typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class UnityChan2DController : MonoBehaviour
 {
+	[HideInInspector]
+	public Image weaponIcon;
+
 	[SerializeField]
 	private Slider hpSlider;
     [SerializeField]
@@ -74,6 +77,7 @@ public class UnityChan2DController : MonoBehaviour
     void Start(){
         if (networkTransform.isLocalPlayer) {
             camera = GameObject.Find("MainCamera").GetComponent<Camera>();
+			weaponIcon = GameObject.Find("Canvas/WeaponIcon").GetComponent<Image>();
 			//hpBar = GameObject.Find("Canvas/HpBar").GetComponent<Image>();
         }
     }

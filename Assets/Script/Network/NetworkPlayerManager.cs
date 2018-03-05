@@ -9,8 +9,6 @@ public class NetworkPlayerManager : NetworkBehaviour {
 //    private GameObject characterPrefab;
     [SerializeField]
     private WeaponController weaponController;
-    [SerializeField]
-    private UnityChan2DController unityChan2DController;
 
     [SyncVar(hook = "SyncScaleValue")]
     public Vector3 syncScale;
@@ -18,6 +16,7 @@ public class NetworkPlayerManager : NetworkBehaviour {
 	public float syncHp;
 
     public DungeonController dungeonController;
+	public UnityChan2DController unityChan2DController;
 
 	//Dictionary<uint, NetworkPlayerManager> playersManagerDic = new Dictionary<uint, NetworkPlayerManager>();
 

@@ -969,10 +969,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponController: {fileID: 114117609037332100}
-  unityChan2DController: {fileID: 114858762082063750}
   syncScale: {x: 0, y: 0, z: 0}
   syncHp: 10
   dungeonController: {fileID: 0}
+  unityChan2DController: {fileID: 114858762082063750}
 --- !u!114 &114618228798290380
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1003,11 +1003,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0152e6c9da34b73a86cf8b63b544e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponIcon: {fileID: 0}
   hpSlider: {fileID: 114903513671819696}
   weaponController: {fileID: 114117609037332100}
   destroyEffect: {fileID: 100000, guid: f75468363e2394440a081e9c175e6c93, type: 2}
   hp: 10
-  hpBar: {fileID: 0}
   playerId: 0
   camera: {fileID: 0}
   maxSpeed: 10

@@ -131,6 +131,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponController: {fileID: 0}
   speed: 10
+  damage: 1
+  weaponIconImage: {fileID: 21300000, guid: 163852e0faf08e744a789296753a3e79, type: 3}
   trailRendererWith2DCollider: {fileID: 114099132069266602}
   destroyTime: 2
 --- !u!114 &114099132069266602
