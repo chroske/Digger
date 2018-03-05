@@ -33,6 +33,7 @@ public class WeaponController : MonoBehaviour {
 
     void ShotEnemyPlayer(){
         var enemyBullet = Instantiate (bullet, muzzle.transform.position, transform.rotation);
+		enemyBullet.GetComponent<BaseBulletController>().weaponController = this;;
         enemyBullet.tag = "enemy_bullet";
     }
 }
