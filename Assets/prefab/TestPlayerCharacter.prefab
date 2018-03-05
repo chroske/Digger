@@ -666,6 +666,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3ea11349921e04fb990a97c076f07c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullets:
+  - {fileID: 1414807399176454, guid: b628e2e8a8ad73948b0d28a923860376, type: 2}
+  - {fileID: 1523946111672368, guid: 9f173e20291914723993fb3cefb18047, type: 2}
   networkPlayerManager: {fileID: 114545725206144160}
   bullet: {fileID: 1523946111672368, guid: 9f173e20291914723993fb3cefb18047, type: 2}
   muzzle: {fileID: 1233286212783852}

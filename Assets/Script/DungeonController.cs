@@ -29,7 +29,7 @@ public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
 				var effect = Instantiate (exprosionEffect, c.transform.position, Quaternion.identity, this.transform.parent);
 				CreateDigCircle (c.transform.position, 0.5f);
 				networkPlayerManager.CmdProvideDigToServer (c.transform.position, 0.5f);
-				//Destroy (c.gameObject);
+				Destroy (c.gameObject);
 				Destroy (effect, 0.3f);
 				break;
 			case "drillBullet":

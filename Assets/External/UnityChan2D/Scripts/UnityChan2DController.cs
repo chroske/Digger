@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
@@ -92,7 +93,7 @@ public class UnityChan2DController : MonoBehaviour
 				Dig (Input.GetButtonDown("Fire1"));
 				Move(x, jump);
                 weaponController.Shot (Input.GetButtonDown("Fire2"));
-
+				weaponController.ChangeBullet (Input.GetAxis ("Mouse ScrollWheel"));
 			} else {
                 //transform.localScale = networkPlayerManager.syncScale;
 //				float x = Input.GetAxis("Horizontal2");

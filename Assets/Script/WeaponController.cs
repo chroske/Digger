@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour {
-    public NetworkPlayerManager networkPlayerManager;
+	[SerializeField]
+	private List<GameObject> bullets;
 
+	private int currentBulletsIndex = 0;
+
+    public NetworkPlayerManager networkPlayerManager;
 	public GameObject bullet;
 	public GameObject muzzle;
+
+	void Start(){
+		bullet = bullets [0];
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -31,9 +39,27 @@ public class WeaponController : MonoBehaviour {
         ShotEnemyPlayer();
     }
 
+	public void ChangeBullet(float axis){
+		if (axis > 0.0f) {
+			currentBulletsIndex++;
+			if(currentBulletsIndex > bullets.Count-1){
+				currentBulletsIndex = 0;
+			}
+			bullet = bullets [currentBulletsIndex];
+		} else if (axis < 0.0f) {
+			currentBulletsIndex--;
+			if(currentBulletsIndex < 0){
+				currentBulletsIndex = bullets.Count-1;
+			}
+			bullet = bullets [currentBulletsIndex];
+		} else {
+			// do nothing
+		}
+	}
+
     void ShotEnemyPlayer(){
         var enemyBullet = Instantiate (bullet, muzzle.transform.position, transform.rotation);
 		enemyBullet.GetComponent<BaseBulletController>().weaponController = this;;
-        enemyBullet.tag = "enemy_bullet";
+		enemyBullet.tag = "enemy_"+enemyBullet.tag;
     }
 }
