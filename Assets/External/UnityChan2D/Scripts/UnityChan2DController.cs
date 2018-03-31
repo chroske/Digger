@@ -94,9 +94,9 @@ public class UnityChan2DController : MonoBehaviour
             if (networkTransform.isLocalPlayer) {
 				float x = Input.GetAxis("Horizontal");
 				bool jump = Input.GetButtonDown("Jump");
-				Dig (Input.GetButtonDown("Fire1"));
+				Dig (Input.GetButtonDown("Fire2"));
 				Move(x, jump);
-                weaponController.Shot (Input.GetButtonDown("Fire2"));
+                weaponController.Shot (Input.GetButtonDown("Fire1"));
 				weaponController.ChangeBullet (Input.GetAxis ("Mouse ScrollWheel"));
 			} else {
 

@@ -8,12 +8,14 @@ public class NetworkPlayerManager : NetworkBehaviour {
 //    [SerializeField]
 //    private GameObject characterPrefab;
     [SerializeField]
-    private WeaponController weaponController;
+	private WeaponController weaponController;
 
     [SyncVar(hook = "SyncScaleValue")]
     public Vector3 syncScale;
 	[SyncVar(hook = "SyncHpValue")]
 	public float syncHp;
+	[SyncVar(hook = "SyncWaeponBulletIndex")]
+	public int syncWaeponBulletIndex;
 
     public DungeonController dungeonController;
 	public UnityChan2DController unityChan2DController;
@@ -28,6 +30,19 @@ public class NetworkPlayerManager : NetworkBehaviour {
         if(isLocalPlayer){
             dungeonController.networkPlayerManager = this;
         }
+
+		if(isLocalPlayer && !isServer){
+			//サーバーにステージの状況を貰いに行く
+			Debug.Log("aaa");
+		}
+
+
+
+	//	if(isServer){
+	//		Dictionary<int, Vector2> test = new Dictionary<int, Vector2> ();
+	//		test.Add (1, new Vector2(1f, -5f));
+	//		RpcGenerateStageToServer (test);
+	//	}
     }
 
     public override void OnStartLocalPlayer() { 
@@ -45,13 +60,17 @@ public class NetworkPlayerManager : NetworkBehaviour {
 	[Command]
 	public void CmdProvideGenerateMineToServer(){
 		GameStatusManager.Instance.playersManagerDic.Add(netId.Value, this);
-		GameStatusManager.Instance.test = 4;
 	}
 
     [Command]
     public void CmdProvideScaleToServer(Vector3 scale){
         syncScale = scale;
     }
+
+	[Command]
+	public void CmdProvideChangeWaeponBulletToServer(int currentBulletsIndex){
+		syncWaeponBulletIndex = currentBulletsIndex;
+	}
 
     [Command]
     public void CmdProvideWeaponShotToServer(Vector3 shotWeaponVector){
@@ -67,6 +86,11 @@ public class NetworkPlayerManager : NetworkBehaviour {
 	public void CmdProvideHitDamageObjectOtherPlayerToServer(NetworkInstanceId hitPlayerNetId, float damage){
 		GameStatusManager.Instance.playersManagerDic [hitPlayerNetId.Value].syncHp -= damage;
     }
+
+	//[ClientRpc]
+	//public void RpcGenerateStageToServer(Dictionary<int, Vector2> popItemPositions){
+	//	Debug.Log (popItemPositions[0]);
+	//}
 
     [ClientRpc]
     void RpcWeaponShot(Vector3 shotWeaponVector){
@@ -91,6 +115,10 @@ public class NetworkPlayerManager : NetworkBehaviour {
 	void SyncHpValue(float hp){
 		unityChan2DController.hp = hp;
 		unityChan2DController.DoDamageAction ();
+	}
+
+	void SyncWaeponBulletIndex(int waeponBulletIndex){
+		weaponController.ChangeWaeponBulletByBulletIndex (waeponBulletIndex);
 	}
 
 }

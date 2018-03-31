@@ -47,6 +47,7 @@ public class WeaponController : MonoBehaviour {
 			}
 			bullet = bullets [currentBulletsIndex];
 			networkPlayerManager.unityChan2DController.weaponIcon.sprite = bullet.GetComponent<BaseBulletController> ().weaponIconImage;
+			networkPlayerManager.CmdProvideChangeWaeponBulletToServer (currentBulletsIndex);
 		} else if (axis < 0.0f) {
 			currentBulletsIndex--;
 			if(currentBulletsIndex < 0){
@@ -54,9 +55,14 @@ public class WeaponController : MonoBehaviour {
 			}
 			bullet = bullets [currentBulletsIndex];
 			networkPlayerManager.unityChan2DController.weaponIcon.sprite = bullet.GetComponent<BaseBulletController> ().weaponIconImage;
+			networkPlayerManager.CmdProvideChangeWaeponBulletToServer (currentBulletsIndex);
 		} else {
 			// do nothing
 		}
+	}
+
+	public void ChangeWaeponBulletByBulletIndex(int bulletIndex){
+		bullet = bullets [bulletIndex];
 	}
 
     void ShotEnemyPlayer(){

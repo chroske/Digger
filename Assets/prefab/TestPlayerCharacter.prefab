@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponIcon: {fileID: 0}
-  hpSlider: {fileID: 114903513671819696}
+  hpSlider: {fileID: 0}
   weaponController: {fileID: 114117609037332100}
   destroyEffect: {fileID: 100000, guid: f75468363e2394440a081e9c175e6c93, type: 2}
   hp: 10

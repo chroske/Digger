@@ -5,5 +5,4 @@ using UnityEngine.Networking;
 
 public class GameStatusManager : SingletonMonoBehaviourFast<GameStatusManager> {
 	public Dictionary<uint, NetworkPlayerManager> playersManagerDic = new Dictionary<uint, NetworkPlayerManager>();
-	public int test = 1;
 }
