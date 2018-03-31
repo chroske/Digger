@@ -210,9 +210,7 @@ public class UnityChan2DController : MonoBehaviour
 	}
 
     public void DoDamageAction(){
-		if(networkTransform.isLocalPlayer){
-			hpSlider.value =  hp / maxHp;
-		}
+		hpSlider.value =  hp / maxHp;
 
 		if (hp == 0) {
 			var effect = Instantiate (destroyEffect, transform.position, Quaternion.identity);

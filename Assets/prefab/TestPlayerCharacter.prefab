@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 114618228798290380}
   m_Layer: 0
   m_Name: TestPlayerCharacter
-  m_TagString: Untagged
+  m_TagString: other_player_character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -971,6 +971,7 @@ MonoBehaviour:
   weaponController: {fileID: 114117609037332100}
   syncScale: {x: 0, y: 0, z: 0}
   syncHp: 10
+  syncWaeponBulletIndex: 0
   dungeonController: {fileID: 0}
   unityChan2DController: {fileID: 114858762082063750}
 --- !u!114 &114618228798290380
@@ -1004,7 +1005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponIcon: {fileID: 0}
-  hpSlider: {fileID: 0}
+  hpSlider: {fileID: 114903513671819696}
   weaponController: {fileID: 114117609037332100}
   destroyEffect: {fileID: 100000, guid: f75468363e2394440a081e9c175e6c93, type: 2}
   hp: 10

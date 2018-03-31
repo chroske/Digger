@@ -9,7 +9,7 @@ public class DrillBulletController : BaseBulletController {
 	public float destroyTime = 2f;
 
 	void OnTriggerEnter2D (Collider2D c){
-		if(transform.gameObject.CompareTag ("bullet") && c.gameObject.CompareTag ("other_player_character")){
+		if(transform.gameObject.CompareTag ("drillBullet") && c.gameObject.CompareTag ("other_player_character")){
 			var enemyNetId = c.gameObject.GetComponent<NetworkPlayerManager>().netId;
 			weaponController.networkPlayerManager.CmdProvideHitDamageObjectOtherPlayerToServer(enemyNetId, damage);
 		} else if(c.gameObject.CompareTag ("enemy_bullet")){

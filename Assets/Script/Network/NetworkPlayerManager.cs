@@ -29,12 +29,11 @@ public class NetworkPlayerManager : NetworkBehaviour {
     void Start(){
         if(isLocalPlayer){
             dungeonController.networkPlayerManager = this;
+			GameStatusManager.Instance.myNetworkManager.myNetworkPlayerManager = this;
         }
 
-		if(isLocalPlayer && !isServer){
-			//サーバーにステージの状況を貰いに行く
-			Debug.Log("aaa");
-		}
+		InitializeGameStageOnServer ();
+
 
 
 
@@ -87,11 +86,6 @@ public class NetworkPlayerManager : NetworkBehaviour {
 		GameStatusManager.Instance.playersManagerDic [hitPlayerNetId.Value].syncHp -= damage;
     }
 
-	//[ClientRpc]
-	//public void RpcGenerateStageToServer(Dictionary<int, Vector2> popItemPositions){
-	//	Debug.Log (popItemPositions[0]);
-	//}
-
     [ClientRpc]
     void RpcWeaponShot(Vector3 shotWeaponVector){
         if(!isLocalPlayer){
@@ -105,6 +99,11 @@ public class NetworkPlayerManager : NetworkBehaviour {
             dungeonController.CreateDigCircle(digPosition, digSizeRatio);
         }
     }
+
+	[Server]
+	void InitializeGameStageOnServer (){
+		GameStageManager.Instance.Initialize ();
+	}
 
     void SyncScaleValue(Vector3 scale){
         if(!isLocalPlayer){
@@ -120,5 +119,4 @@ public class NetworkPlayerManager : NetworkBehaviour {
 	void SyncWaeponBulletIndex(int waeponBulletIndex){
 		weaponController.ChangeWaeponBulletByBulletIndex (waeponBulletIndex);
 	}
-
 }

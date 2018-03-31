@@ -11,7 +11,7 @@ public class GameStageManager : SingletonMonoBehaviourFast<GameStageManager> {
 	GameObject dungeon;
 
 	void Start () {
-		Initialize ();
+		//Initialize ();
 	}
 
 	public void Initialize(){
