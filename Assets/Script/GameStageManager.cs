@@ -7,14 +7,16 @@ public class GameStageManager : SingletonMonoBehaviourFast<GameStageManager> {
 	GameObject itemPrefab;
 	[SerializeField]
 	BoxCollider2D ItemFieldInDungeon;
-	[SerializeField]
+
 	GameObject dungeon;
 
 	void Start () {
-		//Initialize ();
+		Initialize ();
 	}
 
 	public void Initialize(){
+        dungeon = GameObject.Find("Dungeons");
+
 		GenItem (new Vector2 (0, -5), new Vector2 (1, 1));
 	}
 

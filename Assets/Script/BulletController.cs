@@ -17,6 +17,8 @@ public class BulletController : BaseBulletController {
             var enemyNetId = c.gameObject.GetComponent<NetworkPlayerManager>().netId;
             weaponController.networkPlayerManager.CmdProvideHitDamageObjectOtherPlayerToServer(enemyNetId, damage);
         } else if(c.gameObject.CompareTag ("enemy_bullet")){
+        } else if(c.gameObject.CompareTag ("item")){
+            Destroy(this.gameObject);
         }
     }
 }

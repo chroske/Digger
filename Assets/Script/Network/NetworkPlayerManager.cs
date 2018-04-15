@@ -102,7 +102,7 @@ public class NetworkPlayerManager : NetworkBehaviour {
 
 	[Server]
 	void InitializeGameStageOnServer (){
-		GameStageManager.Instance.Initialize ();
+		//GameStageManager.Instance.Initialize ();
 	}
 
     void SyncScaleValue(Vector3 scale){

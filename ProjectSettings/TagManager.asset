@@ -13,6 +13,9 @@ TagManager:
   - dungeon
   - drillBullet
   - enemy_drillBullet
+  - controllUnit
+  - partyUnit
+  - item
   layers:
   - Default
   - TransparentFX
