@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4888865320142244}
   - component: {fileID: 212633181174022578}
   - component: {fileID: 61031634721431560}
-  - component: {fileID: 50220365753912146}
   - component: {fileID: 114265791214752014}
-  m_Layer: 0
+  - component: {fileID: 50330590930453412}
+  m_Layer: 12
   m_Name: Item
   m_TagString: item
   m_Icon: {fileID: 0}
@@ -37,13 +37,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1881160861473580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.89, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0.29, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50220365753912146
+--- !u!50 &50330590930453412
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
@@ -51,7 +51,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1881160861473580}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
@@ -72,7 +72,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemId: 0
+  boxCol2d: {fileID: 61031634721431560}
+  rigidbody2D: {fileID: 50330590930453412}
 --- !u!212 &212633181174022578
 SpriteRenderer:
   m_ObjectHideFlags: 1
