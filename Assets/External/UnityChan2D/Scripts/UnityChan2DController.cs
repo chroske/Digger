@@ -159,15 +159,6 @@ public class UnityChan2DController : MonoBehaviour
         m_animator.SetBool("isGround", m_isGround);
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.tag == "DamageObject" && m_state == State.Normal)
-        {
-            m_state = State.Damaged;
-            StartCoroutine(INTERNAL_OnDamage());
-        }
-    }
-
     IEnumerator INTERNAL_OnDamage()
     {
         m_animator.Play(m_isGround ? "Damage" : "AirDamage");
@@ -201,12 +192,18 @@ public class UnityChan2DController : MonoBehaviour
 
 	void OnCollisionEnter2D (Collision2D c){
         if(c.gameObject.CompareTag ("bullet") && !networkPlayerManager.isLocalPlayer){
-//            m_state = State.Damaged;
-//            StartCoroutine(INTERNAL_OnDamage());
             Destroy (c.gameObject);
         } else if(c.gameObject.CompareTag ("enemy_bullet")){
             Destroy (c.gameObject);
-        }
+		} else if(c.gameObject.CompareTag ("item") && networkTransform.isLocalPlayer){
+			networkPlayerManager.CmdGetItem (c.gameObject.GetComponent<ItemController> ().itemPopId);
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D c){
+		if(c.gameObject.CompareTag ("item") && networkTransform.isLocalPlayer){
+			networkPlayerManager.CmdGetItem (c.gameObject.GetComponent<ItemController> ().itemPopId);
+		}
 	}
 
     public void DoDamageAction(){

@@ -85,6 +85,11 @@ public class NetworkPlayerManager : NetworkBehaviour {
 	public void CmdProvideHitDamageObjectOtherPlayerToServer(NetworkInstanceId hitPlayerNetId, float damage){
 		GameStatusManager.Instance.playersManagerDic [hitPlayerNetId.Value].syncHp -= damage;
     }
+	[Command]
+	public void CmdGetItem(int itemPopId){
+		GameStatusManager.Instance.myNetworkManager.gameStageManager.DeleteGetItem (itemPopId);
+		GameStatusManager.Instance.myNetworkManager.gameStageManager.RpcPlayerGetItem(itemPopId);
+	}
 
     [ClientRpc]
     void RpcWeaponShot(Vector3 shotWeaponVector){

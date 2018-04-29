@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 public class ItemController : MonoBehaviour {
-    public int itemId;
+    public int itemPopId;
 	public GameStageManager gameStageManager;
 
 	[SerializeField]
@@ -14,18 +14,6 @@ public class ItemController : MonoBehaviour {
 
 	void Start(){
 		rigidbody2D.gravityScale = 0;
-	}
-
-    void OnCollisionEnter2D (Collision2D c){
-        if(c.gameObject.CompareTag ("my_player_character") || c.gameObject.CompareTag ("other_player_character")){
-			gameStageManager.CmdPlayerGetItem(itemId);
-		}
-    }
-
-	void OnTriggerEnter2D(Collider2D c){
-		if(c.gameObject.CompareTag ("my_player_character") || c.gameObject.CompareTag ("other_player_character")){
-			gameStageManager.CmdPlayerGetItem(itemId);
-		}
 	}
 
 	void OnTriggerExit2D(Collider2D c){

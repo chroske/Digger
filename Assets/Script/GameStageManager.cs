@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class GameStageManager : /*SingletonMonoBehaviourFast<GameStageManager>*/NetworkBehaviour {
+public class GameStageManager : NetworkBehaviour {
 	[SerializeField]
 	GameObject itemPrefab;
 	[SerializeField]
@@ -30,27 +30,27 @@ public class GameStageManager : /*SingletonMonoBehaviourFast<GameStageManager>*/
 		popItem.transform.localScale = popItemSizeScale;
 		itemIdCounter++;
 		var itemController = popItem.GetComponent<ItemController> ();
-		itemController.itemId = itemIdCounter;
+		itemController.itemPopId = itemIdCounter;
 		itemController.gameStageManager = this;
 		generatedItemList.Add (itemIdCounter, itemController);
 
 		popItem.GetComponent<Rigidbody2D> ().simulated = true;
 	}
 
-	public void GetItem(int generatedItemListId){
-		CmdPlayerGetItem (generatedItemListId);
-	}
-
-	[Command]
-	public void CmdPlayerGetItem(int generatedItemListId){
-		Destroy (generatedItemList [generatedItemListId].gameObject);
-		RpcPlayerGetItem (generatedItemListId);
+	public void DeleteGetItem(int ItemPopId){
+		if (generatedItemList.ContainsKey (ItemPopId)) {
+			Destroy (generatedItemList [ItemPopId].gameObject);
+		} else {
+			Debug.LogError ("他のプレイヤーが取得済み");
+		}
 	}
 
 	[ClientRpc]
-	public void RpcPlayerGetItem(int generatedItemListId){
-		if (!isLocalPlayer) {
-			Destroy (generatedItemList [generatedItemListId].gameObject);
+	public void RpcPlayerGetItem(int ItemPopId){
+		if (generatedItemList.ContainsKey (ItemPopId)) {
+			Destroy (generatedItemList [ItemPopId].gameObject);
+		} else {
+			Debug.LogError ("他のプレイヤーが取得済み");
 		}
 	}
 }

@@ -8,7 +8,6 @@ public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
     public NetworkPlayerManager networkPlayerManager;
 	public GameObject digCircle;
 	public GameObject exprosionEffect;
-	public CompositeCollider2D compositeCollider2D;
 
 	void OnCollisionEnter2D (Collision2D c){
 		var tagIndex = c.gameObject.tag.IndexOf ("enemy_");
