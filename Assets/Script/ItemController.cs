@@ -5,6 +5,9 @@ using System.Linq;
 
 public class ItemController : MonoBehaviour {
     public int itemPopId;
+	public int itemId;
+	public int itemCount;
+
 	public GameStageManager gameStageManager;
 
 	[SerializeField]

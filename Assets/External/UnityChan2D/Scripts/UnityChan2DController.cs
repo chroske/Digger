@@ -196,13 +196,15 @@ public class UnityChan2DController : MonoBehaviour
         } else if(c.gameObject.CompareTag ("enemy_bullet")){
             Destroy (c.gameObject);
 		} else if(c.gameObject.CompareTag ("item") && networkTransform.isLocalPlayer){
-			networkPlayerManager.CmdGetItem (c.gameObject.GetComponent<ItemController> ().itemPopId);
+			ItemController itemController = c.gameObject.GetComponent<ItemController> ();
+			networkPlayerManager.CmdProvideGetItemToServer (networkPlayerManager.netId, itemController.itemId, itemController.itemCount, itemController.itemPopId);
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D c){
 		if(c.gameObject.CompareTag ("item") && networkTransform.isLocalPlayer){
-			networkPlayerManager.CmdGetItem (c.gameObject.GetComponent<ItemController> ().itemPopId);
+			ItemController itemController = c.gameObject.GetComponent<ItemController> ();
+			networkPlayerManager.CmdProvideGetItemToServer (networkPlayerManager.netId, itemController.itemId, itemController.itemCount, itemController.itemPopId);
 		}
 	}
 

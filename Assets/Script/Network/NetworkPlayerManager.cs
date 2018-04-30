@@ -17,6 +17,14 @@ public class NetworkPlayerManager : NetworkBehaviour {
 	[SyncVar(hook = "SyncWaeponBulletIndex")]
 	public int syncWaeponBulletIndex;
 
+	public struct holdItem
+	{
+		public int itemId;
+		public int itemCount;
+	};
+	public class HoldItems : SyncListStruct<holdItem> {}
+	public HoldItems syncListholdItems = new HoldItems();
+
     public DungeonController dungeonController;
 	public UnityChan2DController unityChan2DController;
 
@@ -86,7 +94,20 @@ public class NetworkPlayerManager : NetworkBehaviour {
 		GameStatusManager.Instance.playersManagerDic [hitPlayerNetId.Value].syncHp -= damage;
     }
 	[Command]
-	public void CmdGetItem(int itemPopId){
+	public void CmdGetItem(int itemPopId, int itemId, int itemCount){
+		GameStatusManager.Instance.myNetworkManager.gameStageManager.DeleteGetItem (itemPopId);
+
+//		GameStatusManager.Instance.myNetworkManager.gameStageManager.RpcPlayerGetItem(itemPopId);
+//		GameStatusManager.Instance.myNetworkManager.gameStageManager.TargetGiveItem(connectionToClient, itemId, itemCount);
+	}
+
+	[Command]
+	public void CmdProvideGetItemToServer(NetworkInstanceId getItemPlayerNetId, int itemId, int itemCount, int itemPopId){
+		holdItem item = new holdItem ();
+		item.itemId = itemId;
+		item.itemCount = itemCount;
+		GameStatusManager.Instance.playersManagerDic [getItemPlayerNetId.Value].syncListholdItems.Add(item);
+
 		GameStatusManager.Instance.myNetworkManager.gameStageManager.DeleteGetItem (itemPopId);
 		GameStatusManager.Instance.myNetworkManager.gameStageManager.RpcPlayerGetItem(itemPopId);
 	}
