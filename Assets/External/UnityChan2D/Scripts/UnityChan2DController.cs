@@ -10,13 +10,13 @@ public class UnityChan2DController : MonoBehaviour
 	[HideInInspector]
 	public Image weaponIcon;
 
-	[SerializeField]
-	private Slider hpSlider;
+
     [SerializeField]
     private WeaponController weaponController;
 
+	public Slider hpSlider;
 	public GameObject destroyEffect;
-	float maxHp;
+
 	public float hp = 10;
 	public int playerId;
     public Camera camera;
@@ -37,7 +37,7 @@ public class UnityChan2DController : MonoBehaviour
     private State m_state = State.Normal;
 
 	private bool isDirectionRight;
-
+	float maxHp;
 
 
     void Reset()
@@ -191,7 +191,7 @@ public class UnityChan2DController : MonoBehaviour
     }
 
 	void OnCollisionEnter2D (Collision2D c){
-        if(c.gameObject.CompareTag ("bullet") && !networkPlayerManager.isLocalPlayer){
+        if(c.gameObject.CompareTag ("bullet")/* && !networkPlayerManager.isLocalPlayer*/){
             Destroy (c.gameObject);
         } else if(c.gameObject.CompareTag ("enemy_bullet")){
             Destroy (c.gameObject);

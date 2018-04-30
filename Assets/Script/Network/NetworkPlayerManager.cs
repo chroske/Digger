@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class NetworkPlayerManager : NetworkBehaviour {
 
@@ -16,6 +17,8 @@ public class NetworkPlayerManager : NetworkBehaviour {
 	public float syncHp;
 	[SyncVar(hook = "SyncWaeponBulletIndex")]
 	public int syncWaeponBulletIndex;
+	[SyncVar(hook = "SyncTeamIdValue")]
+	public int syncTeamId;
 
 	public struct holdItem
 	{
@@ -38,31 +41,23 @@ public class NetworkPlayerManager : NetworkBehaviour {
         if(isLocalPlayer){
             dungeonController.networkPlayerManager = this;
 			GameStatusManager.Instance.myNetworkManager.myNetworkPlayerManager = this;
+			UIManager.Instance.SetTeamIdByUIToggle();
         }
 
 		InitializeGameStageOnServer ();
-
-
-
-
-	//	if(isServer){
-	//		Dictionary<int, Vector2> test = new Dictionary<int, Vector2> ();
-	//		test.Add (1, new Vector2(1f, -5f));
-	//		RpcGenerateStageToServer (test);
-	//	}
     }
 
     public override void OnStartLocalPlayer() { 
         this.gameObject.tag = "my_player_character";
+		this.gameObject.layer = 13;
 		CmdProvideGenerateMineToServer ();
     }
 
-//    void SpawnCharacter(){
-//        var character = Instantiate(characterPrefab, transform.position, Quaternion.identity);
-//        unityChan2DController = character.GetComponent<UnityChan2DController>();
-//        unityChan2DController.networkPlayerManager = this;
-//        NetworkServer.SpawnWithClientAuthority(character, connectionToClient);
-//    }
+	public override void OnStartClient() {
+		SyncTeamIdValue (syncTeamId);
+	}
+
+
 
 	[Command]
 	public void CmdProvideGenerateMineToServer(){
@@ -96,9 +91,6 @@ public class NetworkPlayerManager : NetworkBehaviour {
 	[Command]
 	public void CmdGetItem(int itemPopId, int itemId, int itemCount){
 		GameStatusManager.Instance.myNetworkManager.gameStageManager.DeleteGetItem (itemPopId);
-
-//		GameStatusManager.Instance.myNetworkManager.gameStageManager.RpcPlayerGetItem(itemPopId);
-//		GameStatusManager.Instance.myNetworkManager.gameStageManager.TargetGiveItem(connectionToClient, itemId, itemCount);
 	}
 
 	[Command]
@@ -110,6 +102,11 @@ public class NetworkPlayerManager : NetworkBehaviour {
 
 		GameStatusManager.Instance.myNetworkManager.gameStageManager.DeleteGetItem (itemPopId);
 		GameStatusManager.Instance.myNetworkManager.gameStageManager.RpcPlayerGetItem(itemPopId);
+	}
+
+	[Command]
+	public void CmdProvidChangeTeamId(int teamId){
+		syncTeamId = teamId;
 	}
 
     [ClientRpc]
@@ -140,6 +137,18 @@ public class NetworkPlayerManager : NetworkBehaviour {
 	void SyncHpValue(float hp){
 		unityChan2DController.hp = hp;
 		unityChan2DController.DoDamageAction ();
+	}
+
+	void SyncTeamIdValue(int teamId){
+		if(teamId == 1){
+			this.gameObject.tag = "my_player_character";
+			this.gameObject.layer = 13;
+			unityChan2DController.hpSlider.fillRect.GetComponent<Image>().color = Color.red;
+		} else if(teamId == 2){
+			this.gameObject.tag = "other_player_character";
+			this.gameObject.layer = 14;
+			unityChan2DController.hpSlider.fillRect.GetComponent<Image>().color = Color.blue;
+		}
 	}
 
 	void SyncWaeponBulletIndex(int waeponBulletIndex){

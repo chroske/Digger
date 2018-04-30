@@ -30,6 +30,10 @@ public class WeaponController : MonoBehaviour {
 		if(isShot){
 			var baseBulletController = Instantiate (bullet, muzzle.transform.position, transform.rotation).GetComponent<BaseBulletController>();
 			baseBulletController.weaponController = this;
+			if(networkPlayerManager.gameObject.CompareTag("other_player_character")){
+				baseBulletController.gameObject.tag = "enemy_"+baseBulletController.gameObject.tag;
+				baseBulletController.gameObject.layer = 16;
+			}
             networkPlayerManager.CmdProvideWeaponShotToServer(this.transform.localEulerAngles);
 		}
 	}
@@ -67,7 +71,10 @@ public class WeaponController : MonoBehaviour {
 
     void ShotEnemyPlayer(){
         var enemyBullet = Instantiate (bullet, muzzle.transform.position, transform.rotation);
-		enemyBullet.GetComponent<BaseBulletController>().weaponController = this;;
-		enemyBullet.tag = "enemy_"+enemyBullet.tag;
+		enemyBullet.GetComponent<BaseBulletController>().weaponController = this;
+		if(networkPlayerManager.gameObject.CompareTag("other_player_character")){
+			enemyBullet.tag = "enemy_"+enemyBullet.tag;
+			enemyBullet.layer = 16;
+		}
     }
 }

@@ -11,8 +11,13 @@ public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
 
 	void OnCollisionEnter2D (Collision2D c){
 		var tagIndex = c.gameObject.tag.IndexOf ("enemy_");
-		if (tagIndex >= 0) {
-			var tagText = c.gameObject.tag.Remove (tagIndex, 6);
+		if ((tagIndex >= 0 && networkPlayerManager.gameObject.CompareTag("my_player_character")) || (tagIndex < 0 && networkPlayerManager.gameObject.CompareTag("other_player_character"))) {
+			string tagText = "";
+			if (tagIndex >= 0) {
+				tagText = c.gameObject.tag.Remove (tagIndex, 6);
+			} else {
+				tagText = c.gameObject.tag;
+			}
 			switch(tagText){
 			case "bullet":
 				var effect = Instantiate (exprosionEffect, c.transform.position, Quaternion.identity, this.transform.parent);
@@ -23,7 +28,13 @@ public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
 				break;
 			}
 		} else {
-			switch (c.gameObject.tag) {
+			string tagText = "";
+			if(tagIndex >= 0){
+				tagText = c.gameObject.tag.Remove (tagIndex, 6);
+			} else {
+				tagText = c.gameObject.tag;
+			}
+			switch (tagText) {
 			case "bullet":
 				var effect = Instantiate (exprosionEffect, c.transform.position, Quaternion.identity, this.transform.parent);
 				CreateDigCircle (c.transform.position, 0.5f);
@@ -35,17 +46,6 @@ public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
 				break;
 			}
 		}
-
-
-
-
-//		if (c.gameObject.CompareTag ("bullet")) {
-//
-//        } else if(c.gameObject.CompareTag ("enemy_bullet")){
-//           
-//        }
-
-		//compositeCollider2D.edgeRadius;
 	}
 		
 
@@ -55,18 +55,4 @@ public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
 
         return digHole;
     }
-
-
-
-//	public float lifespan; private float timer;
-//	//Create this later: 
-//	public AnotherScript master; 
-//	void Update () { 
-//		//Set the lifespan of this cube to the masterscript length value 
-//		lifespan = master.length; 
-//		//Keep the timer ticking! 
-//		timer += Time.deltaTime; 
-//		//If the timer (which keeps track of how many seconds we've been alive) is bigger than our allotted lifespan, destroy ourselves 
-//		if(timer>lifespan){ GameObject.Destroy (gameObject); } 
-//	}
 }
