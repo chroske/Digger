@@ -204,7 +204,7 @@ public class UnityChan2DController : MonoBehaviour
 			if(gemDatas.Count > 0){
 				foreach(var gemData in gemDatas){
 					networkPlayerManager.CmdDeliverGemToServer (networkPlayerManager.netId, gemData.itemCount);
-					networkPlayerManager.syncListholdItems.Remove(gemData);
+					//networkPlayerManager.syncListholdItems.Remove(gemData);
 				}
 			}
 		} else if(c.gameObject.CompareTag ("other_home_area") && transform.gameObject.CompareTag("other_player_character") && networkTransform.isLocalPlayer){
@@ -230,7 +230,14 @@ public class UnityChan2DController : MonoBehaviour
 
 		if (hp == 0) {
 			var effect = Instantiate (destroyEffect, transform.position, Quaternion.identity);
-			Destroy (this.gameObject);
+			m_boxcollier2D.enabled = false; //ポップしたアイテムを自分で取得してしまうため当たり判定を消す
+
+			if(networkPlayerManager.isServer){
+				foreach(var holdItem in networkPlayerManager.syncListholdItems){
+					GameStatusManager.Instance.myNetworkManager.gameStageManager.CmdPopDeathItem (holdItem.itemId, holdItem.itemCount, transform.position);
+				}
+			}
+			this.gameObject.SetActive(false);
 		} else {
 			StartCoroutine(INTERNAL_OnDamage());
 		}

@@ -19,12 +19,18 @@ public class UIManager : SingletonMonoBehaviourFast<UIManager> {
 	public void SetTeamIdByUIToggle(){
 		if (TeamToggle1.isOn) {
 			GameStatusManager.Instance.myNetworkManager.myNetworkPlayerManager.CmdProvidChangeTeamId (1);
+			GameStatusManager.Instance.myNetworkManager.myNetworkPlayerManager.PlayerMoveHomePosition (1);
 		} else if(TeamToggle2.isOn) {
 			GameStatusManager.Instance.myNetworkManager.myNetworkPlayerManager.CmdProvidChangeTeamId (2);
+			GameStatusManager.Instance.myNetworkManager.myNetworkPlayerManager.PlayerMoveHomePosition (2);
 		}
 	}
 
-	public void PopRandomItems(){
+	public void OnClickGameStart(){
+		PopRandomItems();
+	}
+
+	void PopRandomItems(){
 		GameStatusManager.Instance.myNetworkManager.gameStageManager.CmdRandomPopItems ();
 	}
 

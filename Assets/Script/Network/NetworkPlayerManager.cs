@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using System.Linq;
 
 public class NetworkPlayerManager : NetworkBehaviour {
 
@@ -46,6 +47,12 @@ public class NetworkPlayerManager : NetworkBehaviour {
 
 		InitializeGameStageOnServer ();
     }
+
+	public void PlayerMoveHomePosition(int teamId){
+		if(teamId == 2){
+			transform.position = new Vector3 (65, 265, transform.position.z);//ポジションべた書きだけどまあ今だけってことで
+		}
+	}
 
     public override void OnStartLocalPlayer() { 
         this.gameObject.tag = "my_player_character";
@@ -112,6 +119,12 @@ public class NetworkPlayerManager : NetworkBehaviour {
 			GameStatusManager.Instance.myNetworkManager.gameStageManager.syncTeam1GemCount += gemCount;
 		} else if(teamId == 2){
 			GameStatusManager.Instance.myNetworkManager.gameStageManager.syncTeam2GemCount += gemCount;
+		}
+
+		//保持してるジェムを削除
+		var holdGems = GameStatusManager.Instance.playersManagerDic [getItemPlayerNetId.Value].syncListholdItems.Where (r => r.itemId == 1).ToList();
+		foreach(var holdGem in holdGems){
+			GameStatusManager.Instance.playersManagerDic [getItemPlayerNetId.Value].syncListholdItems.Remove (holdGem);
 		}
 	}
 

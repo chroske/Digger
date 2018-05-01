@@ -10,6 +10,8 @@ public class BulletController : BaseBulletController {
 			weaponController.networkPlayerManager.CmdProvideHitDamageObjectOtherPlayerToServer (enemyNetId, damage);
 		} else if (c.gameObject.CompareTag ("item") || c.gameObject.CompareTag ("my_home_area") || c.gameObject.CompareTag ("other_home_area")) {
 			Destroy (this.gameObject);
+		} else {
+			Destroy (this.gameObject);
 		}
     }
 }

@@ -12,8 +12,6 @@ public class GameStageManager : NetworkBehaviour {
 
 	[SerializeField]
 	GameObject itemPrefab;
-	[SerializeField]
-	BoxCollider2D ItemFieldInDungeon;
 
 	[Serializable]
 	public class ItemData{
@@ -26,6 +24,8 @@ public class GameStageManager : NetworkBehaviour {
 	Vector2 fieldSize = new Vector2(300, 300);
 
 	GameObject dungeon;
+	GameObject myHomeFrame;
+	GameObject otherHomeFrame;
 	Dictionary<int, ItemController> generatedItemList = new Dictionary<int, ItemController>();
 	int itemIdCounter;
 
@@ -35,9 +35,9 @@ public class GameStageManager : NetworkBehaviour {
 
 	public void Initialize(){
         dungeon = GameObject.Find("Dungeons");
+		myHomeFrame = GameObject.Find("MyHome/MyHomeFrame");
+		otherHomeFrame = GameObject.Find("OtherHome/OtherHomeFrame");
 		itemIdCounter = 0;
-		//GenItem (1, 1, new Vector2 (86, 35), new Vector2 (1, 1));
-		//GenItem (1, 2, new Vector2 (80, 40), new Vector2 (2, 2));
 	}
 
 	void GenItem(int itemId, int itemCount, Vector2 popItemPosition, Vector2 popItemSizeScale){
@@ -64,6 +64,12 @@ public class GameStageManager : NetworkBehaviour {
 	}
 
 	[Command]
+	public void CmdPopDeathItem(int itemId, int itemCount, Vector2 itemPopPosition){
+		GenItem (itemId, itemCount, itemPopPosition, new Vector2 (1, 1));
+		RpcPopDeathItem (itemId, itemCount, itemPopPosition);
+	}
+
+	[Command]
 	public void CmdRandomPopItems(){
 		List<ItemData> itemsPopPosition = new List<ItemData> ();
 		for(int i=0; i<popItemCount; i++){
@@ -76,20 +82,24 @@ public class GameStageManager : NetworkBehaviour {
 		}
 
 		var itemsPopPositionJson = JsonUtility.ToJson (new Serialization<ItemData>(itemsPopPosition));
-		RpcRandomPopItems (itemsPopPositionJson);
+		RpcPopItems (itemsPopPositionJson);
 
 		foreach(var itemPopPosition in itemsPopPosition){
 			GenItem(itemPopPosition.itemId, itemPopPosition.itemCount, itemPopPosition.itemPopPosition, itemPopPosition.itemScale);
 		}
+		myHomeFrame.SetActive (false);
+		otherHomeFrame.SetActive (false);
 	}
 
 	[ClientRpc]
-	public void RpcRandomPopItems(string itemsPopPositionJson){
+	public void RpcPopItems(string itemsPopPositionJson){
 		List<ItemData> itemsPopPosition = JsonUtility.FromJson<Serialization<ItemData>> (itemsPopPositionJson).ToList();
 
 		foreach(var itemPopPosition in itemsPopPosition){
 			GenItem(itemPopPosition.itemId, itemPopPosition.itemCount, itemPopPosition.itemPopPosition, itemPopPosition.itemScale);
 		}
+		myHomeFrame.SetActive (false);
+		otherHomeFrame.SetActive (false);
 	}
 
 	[ClientRpc]
@@ -101,11 +111,9 @@ public class GameStageManager : NetworkBehaviour {
 			Debug.LogError ("他のプレイヤーが取得済み");
 		}
 	}
-
-	[TargetRpc]
-	public void TargetGiveItem(NetworkConnection target, int itemId, int itemCount){
-		//GameStatusManager.Instance.myNetworkManager.myNetworkPlayerManager.holdItems.Add(new holdItem());
-		Debug.Log ("give item");
+	[ClientRpc]
+	public void RpcPopDeathItem(int itemId, int itemCount, Vector2 itemPopPosition){
+		GenItem (itemId, itemCount, itemPopPosition, new Vector2(1,1));
 	}
 
 	void SyncTeam1GemCountValue(int team1GemCount){
