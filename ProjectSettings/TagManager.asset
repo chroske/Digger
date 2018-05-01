@@ -13,9 +13,11 @@ TagManager:
   - dungeon
   - drillBullet
   - enemy_drillBullet
-  - controllUnit
-  - partyUnit
   - item
+  - my_team_player_character
+  - other_team_player_character
+  - my_home_area
+  - other_home_area
   layers:
   - Default
   - TransparentFX
@@ -28,12 +30,12 @@ TagManager:
   - Ground
   - Player
   - Dungeon
-  - Bullet
+  - Test
   - Item
-  - 
-  - 
-  - 
-  - 
+  - MyTeamPc
+  - OtherTeamPc
+  - MyTeamBullet
+  - OtherTeamBullet
   - 
   - 
   - 

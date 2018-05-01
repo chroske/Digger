@@ -8,6 +8,13 @@ public class UIManager : SingletonMonoBehaviourFast<UIManager> {
 	Toggle TeamToggle1;
 	[SerializeField]
 	Toggle TeamToggle2;
+	[SerializeField]
+	Text GemCounterTeam1;
+	[SerializeField]
+	Text GemCounterTeam2;
+	[SerializeField]
+	GameObject GameStartButton;
+
 
 	public void SetTeamIdByUIToggle(){
 		if (TeamToggle1.isOn) {
@@ -17,15 +24,20 @@ public class UIManager : SingletonMonoBehaviourFast<UIManager> {
 		}
 	}
 
-	public void OnValueChangeTeamToggle1(Toggle toggle){
-		if(toggle.isOn){
-			GameStatusManager.Instance.myNetworkManager.myNetworkPlayerManager.CmdProvidChangeTeamId(1);
-		}
+	public void PopRandomItems(){
+		GameStatusManager.Instance.myNetworkManager.gameStageManager.CmdRandomPopItems ();
 	}
 
-	public void OnValueChangeTeamToggle2(Toggle toggle){
-		if(toggle.isOn){
-			GameStatusManager.Instance.myNetworkManager.myNetworkPlayerManager.CmdProvidChangeTeamId(2);
+	public void SetGameStartButton(bool isServer){
+		GameStartButton.SetActive (isServer);
+	}
+
+	public void SetValueTeamGemCounter(int teamId, int count){
+		if (teamId == 1) {
+			GemCounterTeam1.text = count.ToString ();
+		} else if(teamId == 2) {
+			GemCounterTeam2.text = count.ToString ();
 		}
+
 	}
 }

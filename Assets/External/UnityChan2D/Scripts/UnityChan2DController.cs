@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using System.Linq;
 
 [RequireComponent(/*typeof(Animator), */typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class UnityChan2DController : MonoBehaviour
@@ -198,6 +199,22 @@ public class UnityChan2DController : MonoBehaviour
 		} else if(c.gameObject.CompareTag ("item") && networkTransform.isLocalPlayer){
 			ItemController itemController = c.gameObject.GetComponent<ItemController> ();
 			networkPlayerManager.CmdProvideGetItemToServer (networkPlayerManager.netId, itemController.itemId, itemController.itemCount, itemController.itemPopId);
+		} else if(c.gameObject.CompareTag ("my_home_area") && transform.gameObject.CompareTag("my_player_character") && networkTransform.isLocalPlayer){
+			var gemDatas = networkPlayerManager.syncListholdItems.Where (r => r.itemId == 1).ToList();
+			if(gemDatas.Count > 0){
+				foreach(var gemData in gemDatas){
+					networkPlayerManager.CmdDeliverGemToServer (networkPlayerManager.netId, gemData.itemCount);
+					networkPlayerManager.syncListholdItems.Remove(gemData);
+				}
+			}
+		} else if(c.gameObject.CompareTag ("other_home_area") && transform.gameObject.CompareTag("other_player_character") && networkTransform.isLocalPlayer){
+			var gemDatas = networkPlayerManager.syncListholdItems.Where (r => r.itemId == 1).ToList();
+			if(gemDatas.Count > 0){
+				foreach(var gemData in gemDatas){
+					networkPlayerManager.CmdDeliverGemToServer (networkPlayerManager.netId, gemData.itemCount);
+					networkPlayerManager.syncListholdItems.Remove(gemData);
+				}
+			}
 		}
 	}
 

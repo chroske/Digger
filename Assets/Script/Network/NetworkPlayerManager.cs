@@ -100,8 +100,19 @@ public class NetworkPlayerManager : NetworkBehaviour {
 		item.itemCount = itemCount;
 		GameStatusManager.Instance.playersManagerDic [getItemPlayerNetId.Value].syncListholdItems.Add(item);
 
+
 		GameStatusManager.Instance.myNetworkManager.gameStageManager.DeleteGetItem (itemPopId);
 		GameStatusManager.Instance.myNetworkManager.gameStageManager.RpcPlayerGetItem(itemPopId);
+	}
+
+	[Command]
+	public void CmdDeliverGemToServer(NetworkInstanceId getItemPlayerNetId, int gemCount){
+		int teamId = GameStatusManager.Instance.playersManagerDic [getItemPlayerNetId.Value].syncTeamId;
+		if (teamId == 1) {
+			GameStatusManager.Instance.myNetworkManager.gameStageManager.syncTeam1GemCount += gemCount;
+		} else if(teamId == 2){
+			GameStatusManager.Instance.myNetworkManager.gameStageManager.syncTeam2GemCount += gemCount;
+		}
 	}
 
 	[Command]
