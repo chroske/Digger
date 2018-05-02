@@ -7,6 +7,7 @@ public class BaseBulletController : MonoBehaviour {
 	public WeaponController weaponController;
 	public float speed = 10f;
 	public float damage = 1.0f;
+	public float rateOfFire = 0.5f; //少ないほど連射が早い
 	public Sprite weaponIconImage;
 
 	void Start(){

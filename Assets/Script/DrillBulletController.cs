@@ -15,6 +15,8 @@ public class DrillBulletController : BaseBulletController {
 		} else if(c.gameObject.CompareTag ("dungeon")){
 			trailRendererWith2DCollider.pausing = false;
 			ChangeBulletSpeed (5f);
+		} else if (c.gameObject.CompareTag ("item") || c.gameObject.CompareTag ("my_home_area") || c.gameObject.CompareTag ("other_home_area")) {
+			Destroy (this.gameObject);
 		}
 
 		Destroy (this.gameObject, destroyTime);

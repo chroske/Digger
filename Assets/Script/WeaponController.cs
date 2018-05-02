@@ -7,13 +7,18 @@ public class WeaponController : MonoBehaviour {
 	private List<GameObject> bullets;
 
 	private int currentBulletsIndex = 0;
+	private bool isShotBullet;
+	private float rateOfFire;
 
     public NetworkPlayerManager networkPlayerManager;
 	public GameObject bullet;
 	public GameObject muzzle;
 
+
 	void Start(){
 		bullet = bullets [0];
+		rateOfFire = bullet.GetComponent<BaseBulletController> ().rateOfFire;
+		isShotBullet = true;
 	}
 
 	// Update is called once per frame
@@ -28,14 +33,26 @@ public class WeaponController : MonoBehaviour {
 
     public void Shot(bool isShot){
 		if(isShot){
-			var baseBulletController = Instantiate (bullet, muzzle.transform.position, transform.rotation).GetComponent<BaseBulletController>();
-			baseBulletController.weaponController = this;
-			if(networkPlayerManager.gameObject.CompareTag("other_player_character")){
-				baseBulletController.gameObject.tag = "enemy_"+baseBulletController.gameObject.tag;
-				baseBulletController.gameObject.layer = 16;
+			if(isShotBullet){
+				isShotBullet = false;
+
+				var baseBulletController = Instantiate (bullet, muzzle.transform.position, transform.rotation).GetComponent<BaseBulletController>();
+				baseBulletController.weaponController = this;
+				if(networkPlayerManager.gameObject.CompareTag("other_player_character")){
+					baseBulletController.gameObject.tag = "enemy_"+baseBulletController.gameObject.tag;
+					baseBulletController.gameObject.layer = 16;
+				}
+				networkPlayerManager.CmdProvideWeaponShotToServer(this.transform.localEulerAngles);
+
+				StartCoroutine ("ShopBulletLoop");
 			}
-            networkPlayerManager.CmdProvideWeaponShotToServer(this.transform.localEulerAngles);
 		}
+	}
+
+	IEnumerator ShopBulletLoop ()
+	{
+		yield return new WaitForSeconds (rateOfFire);
+		isShotBullet = true;
 	}
 
     public void ShotVector(Vector3 shotWeaponVector){
@@ -63,10 +80,12 @@ public class WeaponController : MonoBehaviour {
 		} else {
 			// do nothing
 		}
+		rateOfFire = bullet.GetComponent<BaseBulletController> ().rateOfFire;
 	}
 
 	public void ChangeWaeponBulletByBulletIndex(int bulletIndex){
 		bullet = bullets [bulletIndex];
+		rateOfFire = bullet.GetComponent<BaseBulletController> ().rateOfFire;
 	}
 
     void ShotEnemyPlayer(){

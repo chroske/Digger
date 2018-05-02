@@ -79,7 +79,6 @@ public class UnityChan2DController : MonoBehaviour
         if (networkTransform.isLocalPlayer) {
             camera = GameObject.Find("MainCamera").GetComponent<Camera>();
 			weaponIcon = GameObject.Find("Canvas/WeaponIcon").GetComponent<Image>();
-			//hpBar = GameObject.Find("Canvas/HpBar").GetComponent<Image>();
         }
     }
 
@@ -97,7 +96,7 @@ public class UnityChan2DController : MonoBehaviour
 				bool jump = Input.GetButtonDown("Jump");
 				Dig (Input.GetButtonDown("Fire2"));
 				Move(x, jump);
-                weaponController.Shot (Input.GetButtonDown("Fire1"));
+				weaponController.Shot (Input.GetButton("Fire1"));
 				weaponController.ChangeBullet (Input.GetAxis ("Mouse ScrollWheel"));
 			} else {
 
