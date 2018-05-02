@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class GameStageManager : NetworkBehaviour {
 	[SyncVar(hook = "SyncTeam1GemCountValue")]
@@ -20,17 +21,40 @@ public class GameStageManager : NetworkBehaviour {
 		public Vector2 itemScale;
 		public Vector2 itemPopPosition;
 	}
-	int popItemCount = 155;
-	Vector2 fieldSize = new Vector2(300, 300);
+
+	public bool isStartGame;
 
 	GameObject dungeon;
 	GameObject myHomeFrame;
 	GameObject otherHomeFrame;
 	Dictionary<int, ItemController> generatedItemList = new Dictionary<int, ItemController>();
 	int itemIdCounter;
+	float countTime = 0;
+
+	/* ゲーム調整パラメータ群 */
+
+	int popItemCount = 155;
+	Vector2 fieldSize = new Vector2(300, 300);
+	float gameTime = 30f;
+
+	/* ゲーム調整パラメータ群 */
+
 
 	void Start () {
 		Initialize ();
+	}
+
+	void Update () {
+		if(isStartGame){
+			countTime += Time.deltaTime; //スタートしてからの秒数を格納
+			float limitTime = ((gameTime-countTime) < 0) ? 0 : (gameTime-countTime); 
+			UIManager.Instance.timerText.text = limitTime.ToString("F2"); //小数2桁にして表示
+			if((gameTime-countTime) <= 0){
+				//game end
+				isStartGame = false;
+				EndGame ();
+			}
+		}
 	}
 
 	public void Initialize(){
@@ -63,6 +87,23 @@ public class GameStageManager : NetworkBehaviour {
 		}
 	}
 
+	[Server]
+	public void EndGame(){
+		int winnerTeamId;
+		if (syncTeam1GemCount > syncTeam2GemCount) {
+			Debug.Log ("red win");
+			winnerTeamId = 1;
+		} else if(syncTeam1GemCount < syncTeam2GemCount) {
+			Debug.Log ("blue win");
+			winnerTeamId = 2;
+		} else {
+			Debug.Log ("draw");
+			winnerTeamId = 0;
+		}
+		UIManager.Instance.SetValueGameResultText (winnerTeamId);
+		RpcEndGame (winnerTeamId);
+	}
+
 	[Command]
 	public void CmdPopDeathItem(int itemId, int itemCount, Vector2 itemPopPosition){
 		GenItem (itemId, itemCount, itemPopPosition, new Vector2 (1, 1));
@@ -89,6 +130,24 @@ public class GameStageManager : NetworkBehaviour {
 		}
 		myHomeFrame.SetActive (false);
 		otherHomeFrame.SetActive (false);
+	}
+
+	[Command]
+	public void CmdStartGameTimer(){
+		isStartGame = true;
+		RpcStartGameTimer ();
+	}
+		
+
+
+	[ClientRpc]
+	public void RpcStartGameTimer(){
+		isStartGame = true;
+	}
+
+	[ClientRpc]
+	public void RpcEndGame(int winnerTeamId){
+		UIManager.Instance.SetValueGameResultText (winnerTeamId);
 	}
 
 	[ClientRpc]

@@ -14,7 +14,10 @@ public class UIManager : SingletonMonoBehaviourFast<UIManager> {
 	Text GemCounterTeam2;
 	[SerializeField]
 	GameObject GameStartButton;
+	[SerializeField]
+	Text GameResultText;
 
+	public Text timerText;
 
 	public void SetTeamIdByUIToggle(){
 		if (TeamToggle1.isOn) {
@@ -28,6 +31,7 @@ public class UIManager : SingletonMonoBehaviourFast<UIManager> {
 
 	public void OnClickGameStart(){
 		PopRandomItems();
+		GameStatusManager.Instance.myNetworkManager.gameStageManager.CmdStartGameTimer ();
 	}
 
 	void PopRandomItems(){
@@ -44,6 +48,16 @@ public class UIManager : SingletonMonoBehaviourFast<UIManager> {
 		} else if(teamId == 2) {
 			GemCounterTeam2.text = count.ToString ();
 		}
+	}
 
+	public void SetValueGameResultText(int winnerTeamId){
+		GameResultText.gameObject.SetActive (true);
+		if (winnerTeamId == 1) {
+			GameResultText.text = "RED TEAM WIN";
+		} else if (winnerTeamId == 2) {
+			GameResultText.text = "BLUE TEAM WIN";
+		} else {
+			GameResultText.text = "DRAW";
+		}
 	}
 }

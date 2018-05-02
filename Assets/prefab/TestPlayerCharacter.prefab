@@ -383,7 +383,6 @@ GameObject:
   - component: {fileID: 224551556622533636}
   - component: {fileID: 223610254093269170}
   - component: {fileID: 114421537504135662}
-  - component: {fileID: 114152808312475578}
   m_Layer: 14
   m_Name: Canvas
   m_TagString: Untagged
@@ -815,22 +814,6 @@ MonoBehaviour:
   networkPlayerManager: {fileID: 114545725206144160}
   bullet: {fileID: 1523946111672368, guid: 9f173e20291914723993fb3cefb18047, type: 2}
   muzzle: {fileID: 1233286212783852}
---- !u!114 &114152808312475578
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1812915889304932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 0
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &114204161081834750
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -972,6 +955,7 @@ MonoBehaviour:
   syncScale: {x: 0, y: 0, z: 0}
   syncHp: 10
   syncWaeponBulletIndex: 0
+  syncTeamId: 0
   dungeonController: {fileID: 0}
   unityChan2DController: {fileID: 114858762082063750}
 --- !u!114 &114618228798290380
@@ -1005,8 +989,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponIcon: {fileID: 0}
-  hpSlider: {fileID: 114903513671819696}
   weaponController: {fileID: 114117609037332100}
+  hpSlider: {fileID: 114903513671819696}
   destroyEffect: {fileID: 100000, guid: f75468363e2394440a081e9c175e6c93, type: 2}
   hp: 10
   playerId: 0
