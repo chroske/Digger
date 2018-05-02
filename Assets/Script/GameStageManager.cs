@@ -35,7 +35,7 @@ public class GameStageManager : NetworkBehaviour {
 
 	int popItemCount = 155;
 	Vector2 fieldSize = new Vector2(300, 300);
-	float gameTime = 30f;
+	float gameTime = 180f;
 
 	/* ゲーム調整パラメータ群 */
 
