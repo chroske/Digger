@@ -227,7 +227,7 @@ public class UnityChan2DController : MonoBehaviour
     public void DoDamageAction(){
 		hpSlider.value =  hp / maxHp;
 
-		if (hp == 0) {
+		if (hp <= 0) {
 			var effect = Instantiate (destroyEffect, transform.position, Quaternion.identity);
 			m_boxcollier2D.enabled = false; //ポップしたアイテムを自分で取得してしまうため当たり判定を消す
 
