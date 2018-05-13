@@ -11,7 +11,7 @@ public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
 
 	void OnCollisionEnter2D (Collision2D c){
 		var tagIndex = c.gameObject.tag.IndexOf ("enemy_");
-		if ((tagIndex >= 0 && networkPlayerManager.gameObject.CompareTag("my_player_character")) || (tagIndex < 0 && networkPlayerManager.gameObject.CompareTag("other_player_character"))) {
+		if ((tagIndex >= 0 && networkPlayerManager.gameObject.CompareTag("my_player_character")) || (tagIndex < 0 && networkPlayerManager.gameObject.CompareTag("other_player_character"))) { //enemy
 			string tagText = "";
 			if (tagIndex >= 0) {
 				tagText = c.gameObject.tag.Remove (tagIndex, 6);
@@ -27,7 +27,7 @@ public class DungeonController : SingletonMonoBehaviourFast<DungeonController> {
 			case "drillBullet":
 				break;
 			}
-		} else {
+		} else { //my bullet
 			string tagText = "";
 			if(tagIndex >= 0){
 				tagText = c.gameObject.tag.Remove (tagIndex, 6);

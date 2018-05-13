@@ -9,6 +9,8 @@ public class BaseBulletController : MonoBehaviour {
 	public float damage = 1.0f;
 	public float rateOfFire = 0.5f; //少ないほど連射が早い
 	public Sprite weaponIconImage;
+	public GameObject hitEffect;
+	public float effectLifeTime;
 
 	void Start(){
 		GetComponent<Rigidbody2D>().velocity = transform.up.normalized * speed;

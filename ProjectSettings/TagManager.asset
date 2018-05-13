@@ -18,6 +18,8 @@ TagManager:
   - other_team_player_character
   - my_home_area
   - other_home_area
+  - teleport_bullet
+  - enemy_teleport_bullet
   layers:
   - Default
   - TransparentFX
