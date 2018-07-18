@@ -21,6 +21,7 @@ public class GameCardView : MonoBehaviour {
 
 	Vector3 currentCardUseablePosition;
 	Vector3 defaultPosition;
+	Quaternion defaultRotation;
 	Vector2 defaultPivot;
 	Vector2 defaultScale;
 	bool isMouseEnter;
@@ -36,14 +37,17 @@ public class GameCardView : MonoBehaviour {
 		var mousePositionOnWorld = Camera.main.ScreenToWorldPoint(mousePosition);
 		mousePositionOnWorld.y -= rectTransform.sizeDelta.y / 2;
 		transform.position = mousePositionOnWorld;
+		transform.rotation = Quaternion.identity;
 	}
 		
 	void OnMouseDown() {
 		defaultPosition = transform.position;
+		defaultRotation = transform.rotation;
 	}
 
 	void OnMouseUp() {
 		transform.position = defaultPosition;
+		transform.rotation = defaultRotation;
 	}
 
 	void OnMouseEnter() {
