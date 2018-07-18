@@ -10,14 +10,16 @@ public class PlayerHandCardView : MonoBehaviour {
 	public float cardAngleInterval = 5f; //数が大きいほど斜めになるよ
 	public float handCardLowerRatio = 10; //数が小さいほど外側が下がるよ
 	public float ResetPositionAnimationTime = 1.0f; //数が大きいほどゆっくりアニメーションするよ
+	public float handCardMargin; //数が大きいほどカード間の幅が広がるよ
+	public float screenWidth = 1080; //手札幅上限
 
-	private float cardBasewidth; //カードの
-	public float screenWidth = 1080; //数が大きいほど幅ができるよ
+	float cardBasewidth;
 	float handCardInterval = 0;
 
-	void OnEnable(){
-		ResetPositionHandCard ();
-	}
+
+//	void OnEnable(){
+//		ResetPositionHandCard ();
+//	}
 
 	//手札の位置整え
 	public void ResetPositionHandCard(){
@@ -37,13 +39,16 @@ public class PlayerHandCardView : MonoBehaviour {
 			cardBasewidth = handCardObjects [0].GetComponent<RectTransform>().sizeDelta.x;
 		}
 			
-		if (cardBasewidth * handCardObjects.Count < screenWidth)
+		if ((cardBasewidth + handCardMargin) * handCardObjects.Count < screenWidth)
 		{
-			handCardInterval = cardBasewidth;
+			handCardInterval = cardBasewidth + handCardMargin;
 		}
 		else
 		{
-			handCardInterval = screenWidth / (handCardObjects.Count);
+			if(handCardMargin > 0){
+				handCardMargin = 0;
+			}
+			handCardInterval = (screenWidth / (handCardObjects.Count)) + handCardMargin;
 		}
 
 		float handCardAngle = cardAngleInterval*handCardObjects.Count / handCardObjects.Count;

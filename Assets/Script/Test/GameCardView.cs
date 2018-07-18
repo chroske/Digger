@@ -26,6 +26,9 @@ public class GameCardView : MonoBehaviour {
 	bool isMouseEnter;
 	int defaultSortingOrder;
 
+	void Awake(){
+		defaultScale = transform.localScale;
+	}
 
 	void OnMouseDrag() {
 		var mousePosition = Input.mousePosition;
@@ -45,7 +48,6 @@ public class GameCardView : MonoBehaviour {
 
 	void OnMouseEnter() {
 		isMouseEnter = true;
-		defaultScale = transform.localScale;
 		defaultSortingOrder = canvas.sortingOrder;
 		canvas.sortingOrder = ON_MOUSE_SORTING_ORDER;
 		StartCoroutine(UpdateScale(new Vector3(ON_MOUSE_CARD_SCALE, ON_MOUSE_CARD_SCALE, 1), scaleCardAnimationTime, isMouseEnter));
