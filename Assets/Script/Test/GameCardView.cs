@@ -5,21 +5,56 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class GameCardView : MonoBehaviour {
+	/* const */
+	const int ON_MOUSE_SORTING_ORDER = 100;
+	const float ON_MOUSE_CARD_SCALE = 1.3f;
+	/* const */
+
+	[SerializeField]
+	float scaleCardAnimationTime = 0.1f;
 	[SerializeField]
 	Image cardImage;
+	[SerializeField]
+	Canvas canvas;
+	[SerializeField]
+	RectTransform rectTransform;
+
 	Vector3 currentCardUseablePosition;
+	Vector3 defaultPosition;
+	Vector2 defaultPivot;
+	Vector2 defaultScale;
 	bool isMouseEnter;
+	int defaultSortingOrder;
+
+
+	void OnMouseDrag() {
+		var mousePosition = Input.mousePosition;
+		mousePosition.z = defaultPosition.z;
+		var mousePositionOnWorld = Camera.main.ScreenToWorldPoint(mousePosition);
+		mousePositionOnWorld.y -= rectTransform.sizeDelta.y / 2;
+		transform.position = mousePositionOnWorld;
+	}
+		
+	void OnMouseDown() {
+		defaultPosition = transform.position;
+	}
+
+	void OnMouseUp() {
+		transform.position = defaultPosition;
+	}
 
 	void OnMouseEnter() {
-		Debug.Log ("OnMouseEnter");
 		isMouseEnter = true;
-		StartCoroutine(UpdateScale(new Vector3(1.3f, 1.3f, 1), 0.1f, isMouseEnter));
+		defaultScale = transform.localScale;
+		defaultSortingOrder = canvas.sortingOrder;
+		canvas.sortingOrder = ON_MOUSE_SORTING_ORDER;
+		StartCoroutine(UpdateScale(new Vector3(ON_MOUSE_CARD_SCALE, ON_MOUSE_CARD_SCALE, 1), scaleCardAnimationTime, isMouseEnter));
 	}
 
 	void OnMouseExit() {
-		Debug.Log ("OnMouseExit");
 		isMouseEnter = false;
-		StartCoroutine(UpdateScale(new Vector3(1, 1, 1), 0.1f, isMouseEnter));
+		canvas.sortingOrder = defaultSortingOrder;
+		StartCoroutine(UpdateScale(defaultScale, scaleCardAnimationTime, isMouseEnter));
 	}
 
 	public void SetCardPosition(Vector3 cardPosition)
@@ -27,7 +62,7 @@ public class GameCardView : MonoBehaviour {
 		currentCardUseablePosition = cardPosition;
 	}
 
-	//カードの位置
+	//カードの位置を返す
 	public Vector3 CardPosition
 	{
 		get
@@ -36,6 +71,7 @@ public class GameCardView : MonoBehaviour {
 		}
 	}
 
+	//拡大アニメーション
 	IEnumerator UpdateScale(Vector3 targetScale, float time, bool isMouseEnter)
 	{
 		float startTime = Time.time;
