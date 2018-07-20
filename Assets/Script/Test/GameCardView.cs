@@ -51,16 +51,20 @@ public class GameCardView : MonoBehaviour {
 	}
 
 	void OnMouseEnter() {
-		isMouseEnter = true;
-		defaultSortingOrder = canvas.sortingOrder;
-		canvas.sortingOrder = ON_MOUSE_SORTING_ORDER;
-		StartCoroutine(UpdateScale(new Vector3(ON_MOUSE_CARD_SCALE, ON_MOUSE_CARD_SCALE, 1), scaleCardAnimationTime, isMouseEnter));
+		if(!Input.GetMouseButton(0)){
+			isMouseEnter = true;
+			defaultSortingOrder = canvas.sortingOrder;
+			canvas.sortingOrder = ON_MOUSE_SORTING_ORDER;
+			StartCoroutine(UpdateScale(new Vector3(ON_MOUSE_CARD_SCALE, ON_MOUSE_CARD_SCALE, 1), scaleCardAnimationTime, isMouseEnter));
+		}
 	}
 
 	void OnMouseExit() {
-		isMouseEnter = false;
-		canvas.sortingOrder = defaultSortingOrder;
-		StartCoroutine(UpdateScale(defaultScale, scaleCardAnimationTime, isMouseEnter));
+		if (!Input.GetMouseButton (0) || isMouseEnter) {
+			isMouseEnter = false;
+			canvas.sortingOrder = defaultSortingOrder;
+			StartCoroutine (UpdateScale (defaultScale, scaleCardAnimationTime, isMouseEnter));
+		}
 	}
 
 	public void SetCardPosition(Vector3 cardPosition)
