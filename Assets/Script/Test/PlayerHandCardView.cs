@@ -35,7 +35,7 @@ public class PlayerHandCardView : MonoBehaviour {
 		}
 
 		//一番左のカードを基準のサイズとする
-		if(cardBasewidth == 0){
+		if(cardBasewidth <= 0){
 			cardBasewidth = handCardObjects [0].GetComponent<RectTransform>().sizeDelta.x;
 		}
 			

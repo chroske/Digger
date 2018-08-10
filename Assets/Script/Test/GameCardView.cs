@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 public class GameCardView : MonoBehaviour {
 	/* const */
 	const int ON_MOUSE_SORTING_ORDER = 100;
-	const float ON_MOUSE_CARD_SCALE = 1.3f;
+	const float ON_MOUSE_CARD_SCALE = 1.5f;
+    const float ON_MOUSE_CARD_RISE = 190.0f;
 	/* const */
 
 	[SerializeField]
@@ -20,15 +21,20 @@ public class GameCardView : MonoBehaviour {
 	RectTransform rectTransform;
 
 	Vector3 currentCardUseablePosition;
-	Vector3 defaultPosition;
-	Quaternion defaultRotation;
-	Vector2 defaultPivot;
-	Vector2 defaultScale;
+
+    Vector3 defaultPosition;
+    Quaternion defaultRotation;
+
+	Vector3 defaultImagePosition;
+	Quaternion defaultImageRotation;
+	Vector2 defaultImageScale;
+    Vector2 defaultPivot;
 	bool isMouseEnter;
+    bool isMouseDown;
 	int defaultSortingOrder;
 
 	void Awake(){
-		defaultScale = transform.localScale;
+        defaultImageScale = cardImage.transform.localScale;
 	}
 
 	void OnMouseDrag() {
@@ -37,33 +43,46 @@ public class GameCardView : MonoBehaviour {
 		var mousePositionOnWorld = Camera.main.ScreenToWorldPoint(mousePosition);
 		mousePositionOnWorld.y -= rectTransform.sizeDelta.y / 2;
 		transform.position = mousePositionOnWorld;
-		transform.rotation = Quaternion.identity;
+        cardImage.transform.rotation = Quaternion.identity;
 	}
 		
 	void OnMouseDown() {
+        isMouseDown = true;
 		defaultPosition = transform.position;
 		defaultRotation = transform.rotation;
+        cardImage.transform.position = defaultImagePosition;
 	}
 
 	void OnMouseUp() {
+        isMouseDown = false;
 		transform.position = defaultPosition;
-		transform.rotation = defaultRotation;
+        transform.rotation = defaultRotation;
+        canvas.sortingOrder = defaultSortingOrder;
+        cardImage.transform.position = defaultImagePosition;
+        cardImage.transform.rotation = defaultImageRotation;
+        cardImage.transform.localScale = defaultImageScale;
 	}
 
 	void OnMouseEnter() {
-		if(!Input.GetMouseButton(0)){
-			isMouseEnter = true;
-			defaultSortingOrder = canvas.sortingOrder;
-			canvas.sortingOrder = ON_MOUSE_SORTING_ORDER;
+        if(!Input.GetMouseButton(0)){
+            isMouseEnter = true;
+            defaultSortingOrder = canvas.sortingOrder;
+            defaultImagePosition = cardImage.transform.position;
+            defaultImageRotation = cardImage.transform.rotation;
+            cardImage.transform.rotation = Quaternion.identity;
+            cardImage.transform.position = new Vector3(cardImage.transform.position.x, cardImage.transform.position.y + ON_MOUSE_CARD_RISE, cardImage.transform.position.z);
+            canvas.sortingOrder = ON_MOUSE_SORTING_ORDER;
 			StartCoroutine(UpdateScale(new Vector3(ON_MOUSE_CARD_SCALE, ON_MOUSE_CARD_SCALE, 1), scaleCardAnimationTime, isMouseEnter));
 		}
 	}
 
 	void OnMouseExit() {
-		if (!Input.GetMouseButton (0) || isMouseEnter) {
+        if ((!Input.GetMouseButton(0) || isMouseEnter) && !isMouseDown) {
 			isMouseEnter = false;
-			canvas.sortingOrder = defaultSortingOrder;
-			StartCoroutine (UpdateScale (defaultScale, scaleCardAnimationTime, isMouseEnter));
+            canvas.sortingOrder = defaultSortingOrder;
+            cardImage.transform.position = defaultImagePosition;
+            cardImage.transform.rotation = defaultImageRotation;
+			StartCoroutine (UpdateScale (defaultImageScale, scaleCardAnimationTime, isMouseEnter));
 		}
 	}
 
@@ -89,7 +108,7 @@ public class GameCardView : MonoBehaviour {
 		do
 		{
 			float timeStep = time > 0.0f ? ( Time.time - startTime ) / time : 1.0f;
-			this.gameObject.transform.localScale = Vector3.Lerp( this.gameObject.transform.localScale, targetScale, timeStep );
+            cardImage.transform.localScale = Vector3.Lerp(cardImage.transform.localScale, targetScale, timeStep);
 
 			yield return null;
 		}

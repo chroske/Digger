@@ -12,6 +12,7 @@ public class HandCardSampleManager : MonoBehaviour {
 	public void OnClickGenerateCard(){
 		var card = Instantiate (cardPrefab);
 		card.transform.SetParent (playerHandCardView.gameObject.transform);
+        card.transform.localPosition = new Vector3(0,0,0);
 		playerHandCardView.ResetPositionHandCard ();
 	}
 }
